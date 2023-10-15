@@ -10,6 +10,9 @@
 
             <button class="absolute right-2 mt-32 font-extrabold font-montserrat  text-white mr-20 bg-blue-500 w-20 h-8 rounded-md text-xs hover:bg-blue-800">send</button>
         </div>
-
+        <div class="ml-12 mb-24 w-32 h-8 rounded-sm bg-gray-600 absolute bottom-0 left-0 flex items-center justify-center">
+            <i class="ml-2 mb-2 text-4xl text-green-500 mr-1">&#8226;</i>
+            <h4 class="font-montserrat font-extrabold text-gray-300 text-xs">3 connected</h4>
+        </div>
     </div>
 </template>
