@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen bg-gray-800">
+    <div class="h-screen bg-gray-900">
         <div class="">
             <h2 class="ml-7 pt-10 pb-3 text-blue-500 font-montserrat text-lg font-extrabold">dropit</h2>
         </div>

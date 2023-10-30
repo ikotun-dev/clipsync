@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen lg:h-screen bg-black flex items-center justify-center lg:justify-between">
+    <div class="h-screen bg-gray-900 flex items-center justify-center lg:justify-between">
         <div class="w-100 ml-20 hidden lg:block">
             <img  :src="require('../assets/pana.png')">
         </div>
