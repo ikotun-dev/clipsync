@@ -6,7 +6,7 @@
 
         <div class="lg:mr-64  mb-40 flex flex-col items-center justify-center ">
             <!-- <img class="w-20" :src="require('../assets/logoclip2.png')"> -->
-            <h2 class="text-blue-500 text-2xl font-montserrat font-bold mt-4">Digipulse</h2>
+            <h2 class="text-blue-500 text-2xl font-montserrat font-bold mt-4">Drop.it</h2>
             <h2 class="text-white font-montserrat font-bold mt-4">Enter your session code</h2>
             
                
