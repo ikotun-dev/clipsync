@@ -11,7 +11,7 @@
               
                
                 <input v-model="sessionToken" class="mt-4 w-72 p-2 rounded-md focus:outline-none font-semibold font-pop focus:ring-4 focus:ring-blue-500"  type="text"/>
-                <h4 v-show="short_code == true" class="text-red-600 font-montserrat mt-2 font-extrabold">Code less than 8 characters </h4>
+                <h4 v-show="short_code == true" class="text-red-600 font-montserrat mt-2 font-extrabold">Code is less than 8 characters </h4>
                 <h4 v-show="no_value == true" class="text-red-600 font-montserrat mt-2 font-extrabold">Enter a valid session code </h4>
                 <button v-if="processing == false" class="mt-4 w-72 h-10 bg-blue-800 rounded-md font-montserrat font-extrabold text-center text-white text-md hover:bg-blue-500" @click="InitiateSession()">Initiate Session</button>
                 <button v-else class="h-10 rounded-md w-72 mt-4 py-1 bg-blue-500 flex items-center justify-center">
@@ -60,6 +60,7 @@ export default{
                 const res = await axios.post(`http://127.0.0.1:8000/session/new?session_key=${this.sessionToken}`)
                 if (res.status == 201){
                     const token  = res.data.token
+                    localStorage.setItem('access_token', token)
                     console.log(token)
                     this.$router.push('/session')
                 }
