@@ -10,7 +10,8 @@
             <h2 class="text-white font-montserrat font-bold mt-4">Enter your session code</h2>
               
                
-                <input class="mt-4 w-72 p-2 rounded-md focus:outline-none font-semibold font-pop focus:ring-4 focus:ring-blue-500"  type="text"/>
+                <input v-model="sessionToken" class="mt-4 w-72 p-2 rounded-md focus:outline-none font-semibold font-pop focus:ring-4 focus:ring-blue-500"  type="text"/>
+                <h4 v-show="short_code == true" class="text-red-600 font-montserrat mt-2 font-extrabold">Code less than 8 characters </h4>
                 <h4 v-show="no_value == true" class="text-red-600 font-montserrat mt-2 font-extrabold">Enter a valid session code </h4>
                 <button v-if="processing == false" class="mt-4 w-72 h-10 bg-blue-800 rounded-md font-montserrat font-extrabold text-center text-white text-md hover:bg-blue-500" @click="checkSession(), validateSession()">Initiate Session</button>
                 <button v-else class="h-10 rounded-md w-72 mt-4 py-1 bg-blue-500 flex items-center justify-center">
@@ -37,16 +38,21 @@ export default{
     },
     methods : { 
         checkSession() { 
-            if (this.sessionToken == ''){
+            if (this.sessionToken.length  == 0){
                 this.no_value = true;
 
                 setTimeout(()=> {this.no_value = false;}, 4000)
             }
+            else {
+                this.no_value = false;
+            }
         },
         validateSession(){
+
             const token = this.sessionToken
-            if (token.length < 8){
-                this.short_code = true
+            if (token.length > 1 && token.length < 8){
+                this.short_code = true;
+                setTimeout(() => {this.short_code = false;}, 4000)
             }  
         },
 
