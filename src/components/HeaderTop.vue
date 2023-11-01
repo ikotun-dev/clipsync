@@ -54,10 +54,10 @@ export default{
             }
             
         },
-        createSession(){
+        async createSession(){
             try{
                 this.processing = true
-                const res = axios.post(`http://127.0.0.1:8000/session/new?session_key=${this.sessionToken}`)
+                const res = await axios.post(`http://127.0.0.1:8000/session/new?session_key=${this.sessionToken}`)
                 if (res.status == 201){
                     this.$router.push('/session')
                 }
@@ -65,7 +65,9 @@ export default{
             catch(error){
                 console.log(error)
             }
+            finally{
 
+            }
         }
     },
 
