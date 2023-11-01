@@ -56,7 +56,9 @@ export default{
             }  
         },
 
-       
+        InitiateSession(){
+            this.processing = true
+        }
     },
 //     created() {
 //     this.$options.sockets = {
