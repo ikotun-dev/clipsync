@@ -59,6 +59,8 @@ export default{
                 this.processing = true
                 const res = await axios.post(`http://127.0.0.1:8000/session/new?session_key=${this.sessionToken}`)
                 if (res.status == 201){
+                    const token  = res.data.token
+                    console.log(token)
                     this.$router.push('/session')
                 }
             }
