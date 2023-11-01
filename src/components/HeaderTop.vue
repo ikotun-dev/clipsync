@@ -22,12 +22,19 @@
         </div>
        
     </div>
+    <FooterButtom></FooterButtom>
 </template>
+
 <script>
 import axios from 'axios';
+import FooterButtom from './FooterButtom.vue'
 //import VueNativeSock from 'vue-native-websocket';
 
 export default{
+    components : { 
+        FooterButtom
+    },
+
     data(){ 
         return {
             processing : false,
