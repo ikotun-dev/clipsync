@@ -13,9 +13,9 @@
                 <input v-model="sessionToken" class="mt-4 w-72 p-2 rounded-md focus:outline-none font-semibold font-pop focus:ring-4 focus:ring-blue-500"  type="text"/>
                 <h4 v-show="short_code == true" class="text-red-600 font-montserrat mt-2 font-extrabold">Code less than 8 characters </h4>
                 <h4 v-show="no_value == true" class="text-red-600 font-montserrat mt-2 font-extrabold">Enter a valid session code </h4>
-                <button v-if="processing == false" class="mt-4 w-72 h-10 bg-blue-800 rounded-md font-montserrat font-extrabold text-center text-white text-md hover:bg-blue-500" @click="checkSession(), validateSession()">Initiate Session</button>
+                <button v-if="processing == false" class="mt-4 w-72 h-10 bg-blue-800 rounded-md font-montserrat font-extrabold text-center text-white text-md hover:bg-blue-500" @click="InitiateSession()">Initiate Session</button>
                 <button v-else class="h-10 rounded-md w-72 mt-4 py-1 bg-blue-500 flex items-center justify-center">
-                    <div class=" animate-spin rounded-full border-l-4 border-b-4 border-t-4 w-8 h-8 border-white border-opacity-100 "></div>
+                    <div class=" animate-spin rounded-full  border-b-4 border-t-4 w-6 h-6 border-white border-opacity-100 "></div>
                 </button>
               
            
@@ -24,7 +24,7 @@
     </div>
 </template>
 <script>
-
+import axios from 'axios';
 //import VueNativeSock from 'vue-native-websocket';
 
 export default{
@@ -37,35 +37,37 @@ export default{
         }
     },
     methods : { 
-        checkSession() { 
+
+        InitiateSession(){
+            const token = this.sessionToken
             if (this.sessionToken.length  == 0){
                 this.no_value = true;
 
                 setTimeout(()=> {this.no_value = false;}, 4000)
             }
-            else {
-                this.no_value = false;
-            }
-        },
-        validateSession(){
-
-            const token = this.sessionToken
-            if (token.length > 1 && token.length < 8){
+            else if (token.length > 1 && token.length < 8){
                 this.short_code = true;
                 setTimeout(() => {this.short_code = false;}, 4000)
             }  
+            else {
+                this.processing = true
+            }
+            
         },
+        createSession(){
+            try{
+                this.processing = true
+                const res = axios.post(`http://127.0.0.1:8000/session/new?session_key=${this.sessionToken}`)
+                if (res.status == 201){
+                    this.$router.push('/session')
+                }
+            }
+            catch(error){
+                console.log(error)
+            }
 
-        InitiateSession(){
-            this.processing = true
         }
     },
-//     created() {
-//     this.$options.sockets = {
-//       mySocket: new VueNativeSock({
-//         debug: true,
-//         connection: 'ws://127.0.0.1:8000', // Replace with your actual WebSocket backend URL
-//       }),
-//     };6
+
 }
 </script>
