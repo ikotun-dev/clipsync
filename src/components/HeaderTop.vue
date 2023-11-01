@@ -50,7 +50,7 @@ export default{
                 setTimeout(() => {this.short_code = false;}, 4000)
             }  
             else {
-                this.processing = true
+                this.createSession()
             }
             
         },
