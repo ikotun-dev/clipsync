@@ -24,4 +24,5 @@
             <i class="ml-2 mb-2 text-4xl text-green-500 mr-1">&#8226;</i>
             <h4 class="font-montserrat font-extrabold text-gray-300 text-xs">3 connected</h4>
         </div>
+        
 </div></template>
