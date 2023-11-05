@@ -1,17 +1,17 @@
 <template>
     <div
-      class="fixed top-0 left-0 w-full h-full z-50 bg-gray-900 opacity-75"
+      class="fixed top-0 left-0 w-full h-full z-50 bg-gray-700 opacity-75"
       @click="handleClose"
       v-if="show === true"
     >
-      <div class="flex flex-col justify-center items-center h-full"  >
+      <div class="flex flex-col justify-center items-center h-full "  >
         <div class="bg-white rounded-md p-4">
           <h2 class="text-gray-900 font-montserrat font-extrabold text-lg mb-4">
             Share
           </h2> 
           <div class="flex flex-col items-center">
             <div class="qr-code-container">
-              <VueQRCodeComponent :value="qrCodeValue" size="150" />
+              <qrcode-vue :value="qrCodeValue" size="150" ></qrcode-vue>
             </div>
             <p class="text-gray-600 font-montserrat text-sm mt-4">
               Share this link with others to join the group:
@@ -32,10 +32,10 @@
   </template>
   
   <script>
-import VueQRCodeComponent from 'vue-qrcode-component'
+import QrcodeVue from 'qrcode.vue'
   export default {
     components : {
-        VueQRCodeComponent
+    QrcodeVue
     },
     data() {
       return {
