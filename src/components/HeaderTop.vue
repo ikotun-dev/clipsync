@@ -1,5 +1,5 @@
 <template>
-    <div class="h-[92vh] bg-gray-900 flex items-center justify-center lg:justify-between">
+    <div class="h-[80vh] lg:h-[92vh] bg-gray-900 flex items-center justify-center lg:justify-between">
         <div class="w-100 ml-20 hidden md:mr-14 md:block">
             <img :src="require('../assets/pana.png')">
         </div>

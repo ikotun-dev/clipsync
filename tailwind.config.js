@@ -16,6 +16,7 @@ module.exports = {
 		'pop' : ['Poppins', 'sans-serif'],
     'philosopher' : ['Philosopher', 'sans-serif'],
     montserrat: ['Montserrat', 'sans-serif'],
+    'lato' : ['Lato', 'sans-serif']
 	},
   fontWeight: {
     bold: '600', // Add the bold variant
@@ -43,9 +44,9 @@ module.exports = {
     // 'sm': '300px',  // Target iPhone 5 screen size and smaller
     // 'md': '375px',  // Target iPhone 6/7/8 screen size and smaller
     // 'lg': '500px',  // Target iPhone 6/7/8 Plus screen size and smaller
-    'sm': '640px',  // Small screens (mobile)
-    'md': '768px',  // Medium screens (tablet)
-    'lg': '1024px', // Large screens (desktop)
+    'sm': '400px',  // Small screens (mobile)
+    'md': '705px',  // Medium screens (tablet)
+    'lg': '1100px', // Large screens (desktop)
     'xl': '1280px', // Extra-large screens (larger desktops)
   },
 
