@@ -25,6 +25,8 @@
                 ! </h4>
             <h4 v-show="no_value == true" class="text-red-600 font-montserrat mt-2 font-extrabold">Enter a valid session
                 code </h4>
+            <h4 v-show="sessionAlreadyExist == true" class="text-red-600 font-montserrat mt-2 font-extrabold text-sm">Session with this Code is Ongoing
+                 </h4>
             <button v-if="processing == false"
                 class="mt-4 w-72 h-10 bg-blue-800 rounded-md font-montserrat font-extrabold text-center text-gray-300 text-md hover:bg-blue-600"
                 @click="InitiateSession()">Initiate Session</button>
@@ -59,6 +61,7 @@ export default {
             no_value: false,
             short_code: false,
             notAlpha: false,
+            sessionAlreadyExist: false,
         }
     },
     methods: {
@@ -101,20 +104,28 @@ export default {
                 })
                 if (res.status == 201) {
                     const token = res.data.token
+                    const code = res.data.code
                     localStorage.setItem('access_token', token)
+                    localStorage.setItem('session_code', code)
                     console.log(token)
                     this.$router.push('/session')
                 }
             }
             catch (error) {
-                console.log(error)
+                if (error.response && error.response.status === 409) {
+                    // Handle the 409 conflict error
+                    this.sessionAlreadyExist = true;
+                    setTimeout(() => { this.sessionAlreadyExist = false }, 4000);
+                } else {
+                    // Handle other errors
+                    console.error('An error occurred:', error);
+                }
             }
             finally {
                 this.processing = false
             }
         }
     },
-
 
 }
 </script>
