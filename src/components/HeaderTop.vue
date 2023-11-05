@@ -1,24 +1,28 @@
 <template>
     <div class="h-screen bg-gray-900 flex flex-col items-center justify-center ">
         <RouterLink to="/">
-            <h2 class="text-blue-500 text-xl font-montserrat font-extrabold  absolute top-10 left-0 ml-10 lg:ml-20">dropit</h2>
+            <h2 class="text-blue-500 text-xl font-montserrat font-extrabold  absolute top-10 left-0 ml-10 lg:ml-20">dropit
+            </h2>
         </RouterLink>
-     
+
         <!-- <div class="w-100 ml-20 hidden md:mr-14 md:block">
             <img :src="require('../assets/pana.png')">
         </div> -->
 
         <div class=" mb-10 flex flex-col items-center justify-center">
             <!-- <img class="w-20" :src="require('../assets/logoclip2.png')"> -->
-           
-            <h2 class="text-white font-montserrat font-bold mt-4">Enter your session code</h2>
-            <h3 class="text-gray-500 font-montserrat text-xs lg:text-sm font-bold mt-4">This is unique to your session and restricts access</h3>
 
-            <input v-model="sessionToken"
+            <h2 class="text-white font-montserrat font-bold mt-4">Enter your session code</h2>
+            <h3 class="text-gray-500 font-montserrat text-xs lg:text-sm font-bold mt-4">This is unique to your session and
+                restricts access</h3>
+
+            <input v-model="sessionToken" @input="validateInput"
                 class="mt-4 w-72 p-2 rounded-md focus:outline-none font-semibold font-pop focus:ring-4 focus:ring-blue-500"
                 type="text" />
             <h4 v-show="short_code == true" class="text-red-600 font-montserrat mt-2 font-extrabold">Code is less than 8
                 characters </h4>
+            <h4 v-show="notAlpha == true" class="text-red-600 font-montserrat mt-2 font-bold">Code is not a valid character
+                ! </h4>
             <h4 v-show="no_value == true" class="text-red-600 font-montserrat mt-2 font-extrabold">Enter a valid session
                 code </h4>
             <button v-if="processing == false"
@@ -34,9 +38,8 @@
         <div class="absolute bottom-0 ">
             <FooterButtom></FooterButtom>
         </div>
-        
-    </div>
 
+    </div>
 </template>
 
 <script>
@@ -55,9 +58,17 @@ export default {
             sessionToken: '',
             no_value: false,
             short_code: false,
+            notAlpha: false,
         }
     },
     methods: {
+        validateInput() {
+            // Remove space characters from the input
+            this.sessionToken = this.sessionToken.replace(/[\s!@#$%^&*()_+[\]\\{}|;':",.<>?]/g, '');
+
+            // You can also add additional validation logic here if needed
+        },
+
 
         InitiateSession() {
             const token = this.sessionToken
@@ -85,7 +96,7 @@ export default {
                 const res = await axios.post('http://localhost:8000/new', sessionData, {
                     headers: {
                         'Content-Type': 'application/json',
-                       // 'Authorization': 'Bearer my-authorization-token'
+                        // 'Authorization': 'Bearer my-authorization-token'
                     }
                 })
                 if (res.status == 201) {
@@ -103,6 +114,7 @@ export default {
             }
         }
     },
+
 
 }
 </script>
