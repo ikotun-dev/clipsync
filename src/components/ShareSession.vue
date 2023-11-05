@@ -1,6 +1,6 @@
 <template>
     <div
-      class="fixed top-0 left-0 w-full h-full z-50 bg-gray-700 opacity-75"
+      class="fixed top-0 left-0 w-full h-full z-50 lg:bg-gray-900 bg-gray-700 opacity-75"
       @click="handleClose"
       v-if="show === true"
     >
