@@ -1,26 +1,37 @@
 <template>
+    <div>
+        <ShareSession code="currentSession" v-if="shareSessionComponent == true"></ShareSession>
     <div style="height: auto; min-height: 70rem;" class="pb-20 bg-gray-900">
         <div class="flex justify-between">
             <h2 class="ml-7 pt-10 pb-3 text-blue-500 font-montserrat text-lg font-extrabold">dropit</h2>
-            <h2 class="mr-7 mt-10  h-8  bg-blue-800 rounded-lg text-gray-200 font-montserrat text-xs p-2 font-extrabold ">{{
-                currentSession }}</h2>
+            <h2
+                class="mr-7 mt-10  h-8 lg:mr-20 bg-blue-800 rounded-lg text-gray-200 font-montserrat text-xs p-2 font-extrabold ">
+                {{
+                    currentSession }}</h2>
         </div>
         <div class="flex flex-col">
-            <h4 class="ml-7 m-1 text-sm text-white font-montserrat font-bold">Type here</h4>
+
+            <div class=" flex ml-7 mt-6 mb-3 h-8 lg:h-8 lg:w-12 w-12 rounded-lg px-4 pt-2 bg-blue-900 hover:bg-blue-500 cursor-pointer" @click="openShareModal">
+
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
+                    class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
+                </svg>
+
+                <!-- <h2
+                    class="hidden lg:block ml-1  h-8 lg:mr-2rounded-lg text-gray-900 font-montserrat mt-1 text-xs lg:text-xs  font-extrabold ">
+                    share</h2>-->
+            </div> 
+
+            <h4 class="ml-7  text-sm text-white font-montserrat font-bold">Type here</h4>
 
             <input v-model="boxContent"
                 class="expandable-input text-gray-200 mt-2 mx-6 lg:ml-20 lg:mr-20 bg-gray-600 rounded-md lg:max-h-100 lg:h-16 text-xs h-14 focus:outline-none p-3 font-pop"
                 type="text" />
 
-            <!-- <div class="flex items-center justify-end mt-9 mr-48 ">
-                <label for="fileInput" class="cursor-pointer mr-2 text-blue-500 font-pop-bold font-bold  w-30 px-4 hover:text-gray-300"> + attach file
-                    <input id="fileInput" class="hidden" name="attach file" type="file" />
-                </label>
-               
-            </div> -->
-
             <button @click="sendMessage()"
-                class="absolute right-2 mt-32 font-extrabold font-montserrat  text-white mr-6 lg:mr-20 bg-blue-500 w-20 h-8 rounded-md text-xs hover:bg-blue-800">send</button>
+                class="absolute right-2 mt-56 font-extrabold font-montserrat  text-white mr-6 lg:mr-20 bg-blue-500 w-20 h-8 rounded-md text-xs hover:bg-blue-800">send</button>
         </div>
         <div class="flex flex-col mt-20">
             <h4 class="ml-7 mt-10 text-sm text-gray-400 font-montserrat font-bold">History</h4>
@@ -51,16 +62,22 @@
         </div>
 
     </div>
+    </div>
 </template>
 
 <script>
+import ShareSession from './ShareSession.vue'
 export default {
+    components : {
+        ShareSession
+    },
     data() {
         return {
             socket: "",
             boxContent: "",
             currentSession: "",
             receivedMsg: [],
+            shareSessionComponent : false,
 
         }
     },
@@ -68,6 +85,9 @@ export default {
         sendMessage() {
             let msg = this.boxContent
             this.socket.send(msg)
+        },
+        openShareModal() { 
+            this.shareSessionComponent = true
         }
     },
 
