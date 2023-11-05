@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ShareSession code="currentSession" v-if="shareSessionComponent === true" @close="shareSessionComponent = false"></ShareSession>
+        <ShareSession :code="currentSession" v-if="shareSessionComponent === true" @close="shareSessionComponent = false"></ShareSession>
     <div style="height: auto; min-height: 70rem;" class="pb-20 bg-gray-900">
         <div class="flex justify-between">
             <h2 class="ml-7 pt-10 pb-3 text-blue-500 font-montserrat text-lg font-extrabold">dropit</h2>

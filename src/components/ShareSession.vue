@@ -11,13 +11,13 @@
           </h2> 
           <div class="flex flex-col items-center">
             <div class="qr-code-container">
-              <qr-code :value="shareLink" size="150" />
+              <VueQRCodeComponent :value="qrCodeValue" size="150" />
             </div>
             <p class="text-gray-600 font-montserrat text-sm mt-4">
               Share this link with others to join the group:
             </p>
             <a href="#" class="text-blue-500 font-montserrat text-sm mt-2">
-              {{ code }}
+              {{ qrCodeValue }}
             </a>
           </div>
           <button
@@ -32,11 +32,16 @@
   </template>
   
   <script>
+import VueQRCodeComponent from 'vue-qrcode-component'
   export default {
+    components : {
+        VueQRCodeComponent
+    },
     data() {
       return {
         show: true,
         shareLink: "",
+        qrCodeValue :""
       };
     },
     props:{
@@ -44,14 +49,17 @@
     },
     methods: {
 
-      openShareModal(link) {
-        this.shareLink = link;
+      openShareModal() {
+        this.qrCodeValue = `http://127.0.0.1:8080/new?session_key=${this.code}`;
         this.show = true;
       },
       handleClose() {
         this.$emit('close')
       },
     },
+    mounted () {
+        this.qrCodeValue = `http://127.0.0.1:8080/new?session_key=${this.code}`
+    }
   };
   </script>
   
