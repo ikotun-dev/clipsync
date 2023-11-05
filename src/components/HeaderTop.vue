@@ -1,14 +1,18 @@
 <template>
-    <div class="h-[80vh] lg:h-[92vh] bg-gray-900 flex items-center justify-center lg:justify-between">
-        <div class="w-100 ml-20 hidden md:mr-14 md:block">
+    <div class="h-screen bg-gray-900 flex flex-col items-center justify-center ">
+        <RouterLink to="/">
+            <h2 class="text-blue-500 text-xl font-montserrat font-extrabold  absolute top-10 left-0 ml-10 lg:ml-20">dropit</h2>
+        </RouterLink>
+     
+        <!-- <div class="w-100 ml-20 hidden md:mr-14 md:block">
             <img :src="require('../assets/pana.png')">
-        </div>
+        </div> -->
 
-        <div class="lg:mr-64  mb-40 flex flex-col items-center justify-center md:mr-6">
+        <div class=" mb-10 flex flex-col items-center justify-center">
             <!-- <img class="w-20" :src="require('../assets/logoclip2.png')"> -->
-            <h2 class="text-blue-500 text-2xl font-montserrat font-bold mt-4">Drop.it</h2>
+           
             <h2 class="text-white font-montserrat font-bold mt-4">Enter your session code</h2>
-
+            <h3 class="text-gray-500 font-montserrat text-xs lg:text-sm font-bold mt-4">This is unique to your session and restricts access</h3>
 
             <input v-model="sessionToken"
                 class="mt-4 w-72 p-2 rounded-md focus:outline-none font-semibold font-pop focus:ring-4 focus:ring-blue-500"
@@ -18,7 +22,7 @@
             <h4 v-show="no_value == true" class="text-red-600 font-montserrat mt-2 font-extrabold">Enter a valid session
                 code </h4>
             <button v-if="processing == false"
-                class="mt-4 w-72 h-10 bg-blue-800 rounded-md font-montserrat font-extrabold text-center text-white text-md hover:bg-blue-500"
+                class="mt-4 w-72 h-10 bg-blue-800 rounded-md font-montserrat font-extrabold text-center text-gray-300 text-md hover:bg-blue-600"
                 @click="InitiateSession()">Initiate Session</button>
             <button v-else class="h-10 rounded-md w-72 mt-4 py-1 bg-blue-500 flex items-center justify-center">
                 <div class=" animate-spin rounded-full  border-b-4 border-t-4 w-6 h-6 border-white border-opacity-100 ">
@@ -27,9 +31,12 @@
 
 
         </div>
-
+        <div class="absolute bottom-0 ">
+            <FooterButtom></FooterButtom>
+        </div>
+        
     </div>
-    <FooterButtom></FooterButtom>
+
 </template>
 
 <script>

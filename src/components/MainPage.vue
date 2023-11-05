@@ -4,9 +4,12 @@
             <div class="flex mt-6 mb-12 lg:justify-between items-center ">
                 <h3 class="text-blue-600 font-montserrat font-extrabold text-xl">dropit</h3>
                 <div class="lg:w-[120vh] md:w-[50vh] w-[15vh] "></div>
+                <RouterLink to="/new">
                 <h3
+                 
                     class="text-gray-200 font-montserrat border border-blue-800 rounded-lg text-xs h-8 pt-2 hover:bg-blue-900 cursor-pointer bg-blue-800 w-36 text-center">
                     Create Session</h3>
+                </RouterLink>
             </div>
 
             <div>
