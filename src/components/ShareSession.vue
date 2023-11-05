@@ -1,7 +1,8 @@
 <template>
     <div
       class="fixed top-0 left-0 w-full h-full z-50 bg-gray-900 opacity-75"
-      v-if="show == true"
+      @click="handleClose"
+      v-if="show === true"
     >
       <div class="flex flex-col justify-center items-center h-full"  >
         <div class="bg-white rounded-md p-4">
@@ -21,7 +22,7 @@
           </div>
           <button
             class="mt-4 bg-blue-500 text-white font-montserrat font-extrabold text-xs py-2 px-4 rounded-md hover:bg-blue-700"
-            @click="handleClose()"
+            @click="handleClose"
           >
             Close
           </button>
@@ -48,8 +49,7 @@
         this.show = true;
       },
       handleClose() {
-        this.show = false;
-
+        this.$emit('close')
       },
     },
   };
