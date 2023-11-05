@@ -1,6 +1,6 @@
 <template>
     <div
-      class="fixed top-0 left-0 w-full h-full z-50 lg:bg-gray-900 bg-gray-700 opacity-75"
+      class="fixed top-0 left-0 w-full h-full z-50 lg:bg-gray-900 md:bg-gray-900 bg-gray-700 opacity-75"
       @click="handleClose"
       v-if="show === true"
     >
@@ -50,7 +50,7 @@ import QrcodeVue from 'qrcode.vue'
     methods: {
 
       openShareModal() {
-        this.qrCodeValue = `http://127.0.0.1:8080/new?session_key=${this.code}`;
+        this.qrCodeValue = `http://127.0.0.1:8080/#/session/join`;
         this.show = true;
       },
       handleClose() {
@@ -58,7 +58,7 @@ import QrcodeVue from 'qrcode.vue'
       },
     },
     mounted () {
-        this.qrCodeValue = `http://127.0.0.1:8080/new?session_key=${this.code}`
+        this.qrCodeValue = `http://127.0.0.1:8080/#/session/join`
     }
   };
   </script>

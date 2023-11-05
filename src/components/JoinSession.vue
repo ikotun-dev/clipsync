@@ -13,7 +13,8 @@
             <!-- <img class="w-20" :src="require('../assets/logoclip2.png')"> -->
 
             <h2 class="text-white font-montserrat font-bold mt-4">Join an Ongoing Session</h2>
-            <h3 class="text-gray-500 font-montserrat text-xs lg:text-sm font-bold mt-4">This is session key for Ongoing session</h3>
+            <h3 class="text-gray-500 font-montserrat text-xs lg:text-sm font-bold mt-4">This is session key for ongoing
+                session</h3>
 
             <input v-model="sessionToken" @input="validateInput"
                 class="mt-4 w-72 p-2 rounded-md focus:outline-none font-semibold font-pop focus:ring-4 focus:ring-blue-500"
@@ -24,11 +25,10 @@
                 ! </h4>
             <h4 v-show="no_value == true" class="text-red-600 font-montserrat mt-2 font-extrabold">Enter a valid session
                 code </h4>
-            <h4 v-show="sessionAlreadyExist == true" class="text-red-600 font-montserrat mt-2 font-extrabold text-sm">Session with this Code is Ongoing
-                 </h4>
+
             <button v-if="processing == false"
                 class="mt-4 w-72 h-10 bg-blue-800 rounded-md font-montserrat font-extrabold text-center text-gray-300 text-md hover:bg-blue-600"
-                @click="InitiateSession()">Initiate Session</button>
+                @click="joinSession()">Join</button>
             <button v-else class="h-10 rounded-md w-72 mt-4 py-1 bg-blue-500 flex items-center justify-center">
                 <div class=" animate-spin rounded-full  border-b-4 border-t-4 w-6 h-6 border-white border-opacity-100 ">
                 </div>
@@ -84,36 +84,38 @@ export default {
                 setTimeout(() => { this.short_code = false; }, 4000)
             }
             else {
-                this.createSession()
+                this.joinSession()
             }
 
         },
-        async createSession() {
+        async joinSession() {
             const sessionData = {
                 'code': this.sessionToken
             };
-
+            let res;
             try {
                 this.processing = true
-                const res = await axios.post('http://localhost:8000/new', sessionData, {
+                res = await axios.post('http://localhost:8000/check', sessionData, {
                     headers: {
                         'Content-Type': 'application/json',
                         // 'Authorization': 'Bearer my-authorization-token'
                     }
                 })
-                if (res.status == 201) {
+                if (res.status == 200) {
                     const token = res.data.token
                     const code = res.data.code
                     localStorage.setItem('access_token', token)
                     localStorage.setItem('session_code', code)
                     console.log(token)
+                    // Handle the 409 conflict error
                     this.$router.push('/session')
+
                 }
             }
             catch (error) {
                 if (error.response && error.response.status === 409) {
-                    // Handle the 409 conflict error
-                    this.sessionAlreadyExist = true;
+
+                    //this.sessionAlreadyExist = true;
                     setTimeout(() => { this.sessionAlreadyExist = false }, 4000);
                 } else {
                     // Handle other errors

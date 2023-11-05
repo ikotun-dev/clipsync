@@ -6,7 +6,8 @@ import JoinSession from './components/JoinSession.vue'
 const routes = [ 
     { 'path' : '/' ,  component : MainPage },
     { 'path' : '/new' ,  component : HeaderTop },
-    {'path' : '/session', component : MajorPage}
+    {'path' : '/session', component : MajorPage},
+    {'path' : '/session/join', component: JoinSession}
 ]
 
 const router = createRouter({
