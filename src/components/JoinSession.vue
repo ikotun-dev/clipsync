@@ -95,7 +95,7 @@ export default {
             let res;
             try {
                 this.processing = true
-                res = await axios.post('http://localhost:8000/check', sessionData, {
+                res = await axios.post('https://faded-recess-production.up.railway.app/check', sessionData, {
                     headers: {
                         'Content-Type': 'application/json',
                         // 'Authorization': 'Bearer my-authorization-token'

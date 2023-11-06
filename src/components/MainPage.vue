@@ -7,7 +7,7 @@
                 <RouterLink to="/new">
                 <h3
                  
-                    class="text-gray-200 font-montserrat border border-blue-800 rounded-lg text-xs h-8 pt-2 hover:bg-blue-900 cursor-pointer bg-blue-800 w-36 text-center">
+                    class="text-gray-200 font-montserrat border border-blue-800 rounded-lg text-xs  lg:px-0 h-8 pt-2 hover:bg-blue-900 cursor-pointer bg-blue-800 w-32 lg:w-36 text-center">
                     Create Session</h3>
                 </RouterLink>
             </div>
@@ -25,9 +25,9 @@
             </div>
         </div>
         <div class="mt-24 flex justify-center">
-            <img class="lg:w-[90vh] w-[40vh]" :src="require('../assets/mobilemock.png')">
+            <img class="lg:w-[90vh] w-[40vh]" :src="require('../assets/mobilemock2.png')">
         </div>
-        <div class="mt-20 mb-12 flex justify-center ">
+        <div class="mt-1 mb-12 flex justify-center ">
             <div class="h-24 rounded-lg shadow-inner">
                 <div class="blur-none flex ">
                     <div class=" mr-4 ">

@@ -109,7 +109,7 @@ export default {
         this.currentSession = code
         console.log(token)
 
-        this.socket = new WebSocket(`ws://localhost:8000/socket?session_key=${code}`)
+        this.socket = new WebSocket(`ws://faded-recess-production.up.railway.app/socket?session_key=${code}`)
         this.socket.onmessage = (msg) => {
             this.receivedMsg.push(msg.data);
         }
