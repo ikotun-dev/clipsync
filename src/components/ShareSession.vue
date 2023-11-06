@@ -50,7 +50,7 @@ import QrcodeVue from 'qrcode.vue'
     methods: {
 
       openShareModal() {
-        this.qrCodeValue = `http://127.0.0.1:8080/#/session/join`;
+        this.qrCodeValue = `http://172.20.10.3:8080/#/session/join`;
         this.show = true;
       },
       handleClose() {
@@ -58,7 +58,7 @@ import QrcodeVue from 'qrcode.vue'
       },
     },
     mounted () {
-        this.qrCodeValue = `http://127.0.0.1:8080/#/session/join`
+        this.qrCodeValue = `http://172.20.10.3:8080/#/session/join`
     }
   };
   </script>

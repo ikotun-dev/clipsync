@@ -112,6 +112,7 @@ export default {
         this.socket = new WebSocket(`ws://faded-recess-production.up.railway.app/socket?session_key=${code}`)
         this.socket.onmessage = (msg) => {
             this.receivedMsg.push(msg.data);
+            this.receivedMsg.reverse();
         }
 
 
