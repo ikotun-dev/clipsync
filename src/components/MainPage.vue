@@ -1,5 +1,5 @@
 <template>
-    <div class="pb-40 pt-10 px-10 bg-gray-900">
+    <div class="pb-40 pt-4 lg:pt-10 px-10 bg-gray-900">
         <div class="flex flex-col items-center justify-between">
             <div class="flex mt-6 mb-12 lg:justify-between items-center ">
                 <h3 class="text-blue-600 font-montserrat font-extrabold text-xl">dropit</h3>
@@ -24,22 +24,22 @@
                 </h3>
             </div>
         </div>
-        <div class="mt-24 flex justify-center">
+        <div class="mt-12 flex justify-center">
             <img class="lg:w-[90vh] w-[40vh]" :src="require('../assets/mobilemock2.png')">
         </div>
         <div class="mt-1 mb-12 flex justify-center ">
             <div class="h-24 rounded-lg shadow-inner">
                 <div class="blur-none flex ">
                     <div class=" mr-4 ">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="gray" viewBox="0 0 24 24" strokeWidth={1.5}
-                            stroke="black" class="w-12 h-12">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                            stroke="white" class="w-12 h-12">
                             <path strokeLinecap="round" strokeLinejoin="round"
                                 d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
 
                     <div>
-                        <h4 class="text-md mb-12 lg:text-3xl mt-3 lg:mt-1 font-montserrat font-semibold text-gray-400 ">
+                        <h4 class="text-md mb-12 lg:text-2xl mt-4 lg:mt-2 font-montserrat font-semibold text-gray-400 ">
                             Steps to
                             Create a
                             session</h4>
