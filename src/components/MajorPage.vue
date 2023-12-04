@@ -2,17 +2,17 @@
     <div>
         <ShareSession :code="currentSession" v-if="shareSessionComponent === true" @close="shareSessionComponent = false">
         </ShareSession>
-        <div style="height: auto; min-height: 70rem;" class="pb-20 lg:pl-10 pr-4 bg-gray-900">
+        <div style="height: auto; min-height: 70rem;" class="pb-20  lg:px-36  bg-gray-900">
             <div class="flex justify-between">
-                <h2 class="ml-7 pt-10 pb-3 text-blue-500 font-montserrat text-lg font-extrabold">dropit</h2>
+                <h2 class="lg:ml-20 ml-6 pt-10 pb-3 text-blue-500 font-montserrat text-lg font-extrabold">dropit</h2>
                 <h2
-                    class="mr-7 mt-10  h-8 lg:mr-20 bg-blue-800 rounded-lg text-gray-200 font-montserrat text-xs p-2 font-extrabold ">
+                    class="mr-7 mt-10  h-8 lg:mr-20 bg-blue-800 rounded-sm text-gray-200 font-montserrat text-xs p-2 font-extrabold ">
                     {{
                         currentSession }}</h2>
             </div>
             <div class="flex flex-col">
 
-                <div class=" flex ml-7 mt-6 mb-3 h-8 lg:h-8 lg:w-12 w-12 rounded-lg px-4 pt-2 bg-blue-900 hover:bg-blue-500 cursor-pointer"
+                <div class="flex  lg:ml-20  ml-6 mt-4 mb-3 h-8 lg:h-8 lg:w-12 w-12 rounded-sm px-4 pt-2  bg-blue-900 hover:bg-blue-500 cursor-pointer"
                     @click="openShareModal">
 
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -26,17 +26,17 @@
                     share</h2>-->
                 </div>
 
-                <h4 class="ml-7  text-sm text-white font-montserrat font-bold">Type here</h4>
+                <h4 class="lg:ml-20 ml-6 text-sm text-white font-montserrat font-bold">Type here</h4>
 
                 <input v-model="boxContent"
-                    class="expandable-input text-gray-200 mt-2 mx-6 lg:ml-20 lg:mr-20 bg-gray-600 rounded-md lg:max-h-100 lg:h-16 text-xs h-14 focus:outline-none p-3 font-pop"
+                    class="expandable-input text-gray-200 mt-2 mx-6 lg:ml-20 lg:mr-20 bg-gray-600 rounded-md focus:bg-gray-700 lg:max-h-100 lg:h-16 text-xs h-14 focus:outline-none p-3 font-pop"
                     type="text" />
 
                 <button @click="sendMessage()"
-                    class="absolute right-2 mt-56 font-extrabold font-montserrat  text-white mr-6 lg:mr-24 bg-blue-500 w-20 h-8 rounded-md text-xs hover:bg-blue-800">send</button>
+                    class="absolute right-2 lg:mt-56 mt-47  font-extrabold font-montserrat  text-white mr-4 lg:mr-54 bg-blue-500 w-20 h-8 rounded-sm text-xs hover:bg-blue-800">send</button>
             </div>
             <div class="flex flex-col mt-20">
-                <h4 class="ml-7 mt-10 text-sm text-gray-400 font-montserrat font-bold">History</h4>
+                <h4 class="lg:ml-20 ml-6 mt-10 text-sm text-gray-400 font-montserrat font-bold">History</h4>
 
                 <div v-for="(message, index) in receivedMsg" :key="index" style="height: 100%; overflow-y: auto;"
                     class="flex text-gray-200 mt-2 mx-6 lg:ml-20  lg:mr-20 bg-blue-950 opacity-3 rounded-md text-xs focus:outline-none p-4 pt-6 font-pop">
@@ -60,13 +60,14 @@
             </div>
 
 
-            <div class="ml-4 mr-4 mb-10 w-screen h-8 rounded-sm bg-gray-7 00 fixed bottom-0 flex items-center justify-between">
+            <div class="ml-4 mr-4 mb-10 lg:w-110 w-80 h-8 rounded-sm bg-gray-7 00 fixed bottom-0 flex items-center justify-between">
                 <div class="flex ">
                     <i class="mt-4 ml-2 mb-2 text-4xl text-green-500 mr-1">&#8226;</i>
                     <h4 class="mt-8 font-montserrat font-extrabold text-white text-xs"> connected</h4>
                 </div>
-                <div class="flex">
-                    <h4 class="font-montserrat font-extrabold text-red-600 text-xs absolute right-40 hover:text-red-900"> close</h4>
+                
+                <div class="lg:flex hidden mb-2">
+                    <h4 class="mt-8 font-montserrat font-extrabold text-red-600 text-xs"> close</h4>
                 </div>
 
             </div>
@@ -116,7 +117,7 @@ export default {
         console.log(token)
         //const storedMessages = JSON.parse(localStorage.getItem('receivedMessages'));
 
-            this.socket = new WebSocket(`wss://faded-recess-production.up.railway.app/socket?session_key=${code}`)
+            this.socket = new WebSocket(`ws://127.0.0.1:8000/socket?session_key=${code}`)
             this.socket.onmessage = (msg) => {
         
                     this.receivedMsg.push(msg.data); // Add the message if it doesn't exist
