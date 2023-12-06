@@ -30,7 +30,6 @@
                 <input v-model="boxContent"
                     class="expandable-input text-gray-200 mt-2 mx-6 lg:ml-20 lg:mr-20 bg-gray-600 rounded-md focus:bg-gray-700 lg:max-h-100 lg:h-16 text-xs h-14 focus:outline-none p-3 font-pop"
                     type="text" />
-
                 <button @click="sendMessage()"
                     class="absolute right-2 lg:mt-56 mt-47  font-extrabold font-montserrat  text-white mr-4 lg:mr-54 bg-blue-500 w-20 h-8 rounded-sm text-xs hover:bg-blue-800">send</button>
             </div>
