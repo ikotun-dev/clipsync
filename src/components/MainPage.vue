@@ -8,7 +8,7 @@
                 <h3
                  
                     class="text-gray-200 font-montserrat border border-blue-800 rounded-lg text-xs  lg:px-0 h-8 pt-2 hover:bg-blue-900 cursor-pointer bg-blue-800 w-32 lg:w-36 text-center">
-                    Create Session</h3>
+                    Join Waitlist</h3>
                 </RouterLink>
             </div>
 
@@ -22,6 +22,8 @@
                     Across
                     Devices
                 </h3>
+                <h3 class="lg:text-3xl md:text-xl text-md mt-2 text-white font-montserrat ">Bridging Cross-platform Gaps
+                </h3>
             </div>
         </div>
         <div class="mt-12  justify-center hidden md:flex lg:flex ">
@@ -33,16 +35,16 @@
         <plansSection>
 
         </plansSection>
-        <div class="mt-1 mb-12 flex justify-center ">
+        <!-- <div class="mt-1 mb-12 flex justify-center ">
             <div class="h-24 rounded-lg shadow-inner">
                 <div class="blur-none flex ">
-                    <!-- <div class=" mr-4 ">
+                     <div class=" mr-4 ">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                             stroke="white" class="w-12 h-12">
                             <path strokeLinecap="round" strokeLinejoin="round"
                                 d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                    </div> -->
+                    </div> 
 
                     <div>
                         <h4 class="text-md mb-2 lg:text-2xl mt-4 lg:mt-2 font-montserrat font-semibold text-gray-400 ">
@@ -87,11 +89,8 @@
                     </div>
                 </div>
 
-            </div>
-        </div>
-
-    </div>
-
+            </div> 
+        </div>-->
 </div>
 <FooterButtom></FooterButtom></template>
 <script>
