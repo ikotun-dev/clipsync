@@ -12,9 +12,8 @@
         <div class=" mb-10 flex flex-col items-center justify-center">
             <!-- <img class="w-20" :src="require('../assets/logoclip2.png')"> -->
 
-            <h2 class="text-blue-900 font-montserrat font-extrabold text-lg  mb-4">Join dropit :) </h2>
-            <!-- <h3 class="text-gray-500 font-montserrat text-xs lg:text-sm font-bold mt-4">This is session key for ongoing
-                session</h3> -->
+            <h2 class="text-blue-900 font-montserrat font-extrabold text-lg  mb-2">Join dropit :) </h2>
+             <h3 class="text-gray-500 font-montserrat text-xs hidden lg:text-xs font-bold my-2 mb-3">Reserve your username and get notified when its your turn  &#128521; </h3> 
             <div class="flex flex-col mb-2">
                 <label class="font-montserrat text-xs text-extrabold text-blue-400">Email</label>
                 <input v-model="email" 

@@ -2,7 +2,7 @@
     <div>
         <ShareSession :code="currentSession" v-if="shareSessionComponent === true" @close="shareSessionComponent = false">
         </ShareSession>
-        <div style="height: auto; min-height: 70rem;" class="pb-20  lg:px-36  bg-gray-900">
+        <div style="height: auto; min-height: 70rem;" class="pb-20  lg:px-36  bg-gray-950">
             <div class="flex justify-between">
                 <h2 class="lg:ml-20 ml-6 pt-10 pb-3 text-blue-500 font-montserrat text-lg font-extrabold">dropit</h2>
                 <h2

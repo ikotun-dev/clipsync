@@ -26,8 +26,8 @@
                 </h3>
             </div>
         </div>
-        <div class="mt-12  justify-center hidden md:flex lg:flex ">
-            <img class="lg:w-[90vh] w-[40vh]" :src="require('../assets/mobilemock2.png')">
+        <div class="mt-12 mb-10  justify-center hidden md:flex lg:flex ">
+            <img class="lg:w-[90vh] w-[40vh]" :src="require('../assets/mockupFolder.png')">
         </div>
         <div class="mt-12 flex justify-center lg:hidden md:hidden">
             <img class="lg:w-[90vh] w-[40vh]" :src="require('../assets/mock2.png')">
