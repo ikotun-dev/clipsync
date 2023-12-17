@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen bg-gray-900 flex flex-col items-center justify-center ">
+    <div class="h-screen bg-gray-950 flex flex-col items-center justify-center ">
         <RouterLink to="/">
             <h2 class="text-blue-500 text-xl font-montserrat font-extrabold  absolute top-10 left-0 ml-10 lg:ml-20">dropit
             </h2>
@@ -12,20 +12,20 @@
         <div class=" mb-10 flex flex-col items-center justify-center">
             <!-- <img class="w-20" :src="require('../assets/logoclip2.png')"> -->
 
-            <h2 class="text-gray-300 font-montserrat font-extrabold text-lg  mb-4">Join dropit :) </h2>
+            <h2 class="text-blue-900 font-montserrat font-extrabold text-lg  mb-4">Join dropit :) </h2>
             <!-- <h3 class="text-gray-500 font-montserrat text-xs lg:text-sm font-bold mt-4">This is session key for ongoing
                 session</h3> -->
             <div class="flex flex-col mb-2">
-                <label class="font-montserrat text-sm text-extrabold text-white">Email</label>
-                <input v-model="email" @input="validateInput"
-                    class="mt-2 w-72 p-2 rounded-sm focus:outline-none font-semibold font-pop focus:ring-2 focus:ring-blue-500"
+                <label class="font-montserrat text-xs text-extrabold text-blue-400">Email</label>
+                <input v-model="email" 
+                    class="mt-2 w-72 p-2 rounded-md focus:bg-gray-200 border border-3 border-blue-600 focus:outline-none font-semibold  focus:ring-2 focus:ring-blue-500"
                     type="text" placeholder="" />
             </div>
 
             <div class="flex flex-col">
-                <label class="font-montserrat text-sm text-extrabold text-white"> Username</label>
-                <input v-model="username" @input="validateInput"
-                    class="mt-2 w-72 p-2 rounded-sm focus:outline-none font-semibold font-pop focus:ring-2 focus:ring-blue-500"
+                <label class="font-montserrat text-xs text-extrabold text-blue-400"> Username</label>
+                <input v-model="username" 
+                    class="mt-2 w-72 p-2 rounded-md focus:bg-gray-200 border border-3 border-blue-600 focus:outline-none font-semibold  focus:ring-2 focus:ring-blue-500"
                     type="text" placeholder="" />
             </div>
 
@@ -37,8 +37,8 @@
                 code </h4>
 
             <button v-if="processing == false"
-                class="mt-4 w-72 h-10 bg-blue-800 rounded-md font-montserrat font-extrabold text-center text-gray-300 text-md hover:bg-blue-600"
-                @click="joinSession()">Join</button>
+                class="mt-12 w-72 h-10 bg-blue-900 rounded-md font-montserrat font-extrabold text-center text-gray-300 text-md hover:bg-blue-600"
+                @click="joinSession()">Join Waitlist &#x1F680;</button>
             <button v-else class="h-10 rounded-md w-72 mt-4 py-1 bg-blue-500 flex items-center justify-center">
                 <div class=" animate-spin rounded-full  border-b-4 border-t-4 w-6 h-6 border-white border-opacity-100 ">
                 </div>

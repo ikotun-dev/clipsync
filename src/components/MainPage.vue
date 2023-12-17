@@ -8,14 +8,14 @@
                 <h3
                  
                     class="text-gray-200 font-montserrat border border-blue-800 rounded-lg text-xs  lg:px-0 h-8 pt-2 hover:bg-blue-900 cursor-pointer bg-blue-800 w-32 lg:w-36 text-center">
-                    Join Waitlist</h3>
+                    Join Waitlist &#x1F680;</h3>
                 </RouterLink>
             </div>
 
             <div>
                 <h3 class="lg:text-4xl md:text-2xl text-md font-semibold text-blue-500 font-montserrat inline-block">
                     Seamless Sharing, Instant
-                    Syncing
+                    Syncing &#x21BA;
                 </h3>
                 <h3 class="lg:text-3xl md:text-xl text-sm mt-2 text-white font-montserrat ">Your Gateway to Effortless File
                     and Text Sharing
