@@ -24,6 +24,7 @@ module.exports = {
     bold: '600', // Add the bold variant
   },
   height:{
+    '99' : '28rem',
     '100' : '35rem',
     '11' : '2.75rem',
     '27' : '8rem',

@@ -1,5 +1,5 @@
 <template>
-    <div class="pb-40 pt-4 lg:pt-10 px-10 bg-gray-900">
+    <div class="pb-40 pt-4 lg:pt-10 px-10 bg-gray-950">
         <div class="flex flex-col items-center justify-between">
             <div class="flex mt-6 mb-12 lg:justify-between items-center ">
                 <h3 class="text-blue-600 font-montserrat font-extrabold text-xl">dropit</h3>
@@ -24,9 +24,15 @@
                 </h3>
             </div>
         </div>
-        <div class="mt-12 flex justify-center">
+        <div class="mt-12  justify-center hidden md:flex lg:flex ">
             <img class="lg:w-[90vh] w-[40vh]" :src="require('../assets/mobilemock2.png')">
         </div>
+        <div class="mt-12 flex justify-center lg:hidden md:hidden">
+            <img class="lg:w-[90vh] w-[40vh]" :src="require('../assets/mock2.png')">
+        </div>
+        <plansSection>
+
+        </plansSection>
         <div class="mt-1 mb-12 flex justify-center ">
             <div class="h-24 rounded-lg shadow-inner">
                 <div class="blur-none flex ">
@@ -89,10 +95,12 @@
 </div>
 <FooterButtom></FooterButtom></template>
 <script>
+import plansSection from './plansSection.vue';
 import FooterButtom from './FooterButtom.vue';
 export default{
     components : {
-FooterButtom
+FooterButtom,
+plansSection
     }
 }
 </script>
