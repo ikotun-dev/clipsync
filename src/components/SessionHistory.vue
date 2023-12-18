@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="w-20 p-2 hidden lg:flex justify-center">
-                    <div class="bg-blue-600 px-4 py-1 rounded-sm hover:bg-blue-900 cursor-pointer ">
+                    <div class="bg-gray-500 px-4 py-1 rounded-sm hover:bg-blue-900 cursor-pointer ">
                         View
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="w-20 p-2  hidden lg:flex justify-center ">
-                    <div class="bg-blue-600 px-4 py-1 rounded-sm hover:bg-blue-900 cursor-pointer ">
+                    <div class="bg-gray-500 px-4 py-1 rounded-sm hover:bg-blue-900 cursor-pointer ">
                         View
                     </div>
                 </div>

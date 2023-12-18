@@ -12,7 +12,7 @@
                 <div class="flex pt-3">
                     
                     <h2
-                        class="mr-7 mt-10  h-8 lg:mr-20 bg-blue-800 rounded-sm text-gray-200 font-montserrat text-xs p-2 font-extrabold ">
+                        class="mr-7 mt-10  h-8 lg:mr-20 bg-blue-800 rounded-sm text-gray-200 font-montserrat text-xs p-2 font-extrabold ">collins
                         {{
                             currentSession }}</h2>
                 </div>
