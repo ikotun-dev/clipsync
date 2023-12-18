@@ -3,7 +3,7 @@
         <ShareSession :code="currentSession" v-if="shareSessionComponent === true" @close="shareSessionComponent = false">
         </ShareSession>
         <div style="height: auto; min-height: 70rem;" class="pb-20  lg:px-36  bg-gray-950">
-            <div class="pt-12">
+            <div class="lg:pt-12 pt-5">
                 <a class="lg:ml-20 ml-4 pt-10 pb-3 text-blue-600 font-montserrat text-sm font-thin mr-4 cursor-pointer"
                     @click="$router.go(-1)"> <i class="fa-solid fa-backward"></i> back</a>
             </div>

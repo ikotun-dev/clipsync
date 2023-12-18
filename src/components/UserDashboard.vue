@@ -1,19 +1,20 @@
 <template>
     <div class="bg-gray-950 pt-10 lg:pt-10 h-screen lg:px-36 ">
         <div class="flex  justify-between space-x-6 lg:space-x-52 mx-4 lg:mx-24">
+            <RouterLink to="/">
             <div>
                 <h3 class="font-montserrat font-extrabold text-blue-700 ml-4 mt-2 text-md">dropit</h3>
             </div>
-
+            </RouterLink>
             <div class="flex justify-center items-center space-x-3">
                 <RouterLink to="session">
                 <div
-                    class="w-42 bg-blue-600 p-2 rounded-md flex justify-center text-gray-200 font-montserrat text-sm cursor-pointer">
-                    Create session &#9203;
+                    class=" bg-blue-600 p-2 rounded-md hover:bg-blue-800 text-gray-200 font-montserrat text-sm cursor-pointer">
+                    <i class="fa-solid fa-folder-plus text-xl"></i>
                 </div>
             </RouterLink>
                 <div class="bg-blue-600 p-2 rounded-md">
-                    <i class="fa-solid fa-user-shield text-white"></i>
+                    <i class="fa-solid fa-user-shield text-white text-lg"></i>
                 </div>
             </div>
         </div>
