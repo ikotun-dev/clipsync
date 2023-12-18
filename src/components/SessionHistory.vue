@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-3 flex flex-col  px-10 lg:mx-24">
+    <div class="mt-3 flex flex-col  lg:px-10 px-5 lg:mx-24">
             <h3 class="font-montserrat font-extrabold text-gray-500 mb-4">Session History</h3>
 
             <div
