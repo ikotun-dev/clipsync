@@ -3,12 +3,19 @@
         <ShareSession :code="currentSession" v-if="shareSessionComponent === true" @close="shareSessionComponent = false">
         </ShareSession>
         <div style="height: auto; min-height: 70rem;" class="pb-20  lg:px-36  bg-gray-950">
+            <div class="pt-12">
+            <a class="lg:ml-20 ml-4 pt-10 pb-3 text-blue-600 font-montserrat text-sm font-thin mr-4 cursor-pointer" @click="$router.go(-1)"> &#x25c0; back</a>
+            </div>
+
             <div class="flex justify-between">
-                <h2 class="lg:ml-20 ml-6 pt-10 pb-3 text-blue-500 font-montserrat text-lg font-extrabold">dropit</h2>
-                <h2
-                    class="mr-7 mt-10  h-8 lg:mr-20 bg-blue-800 rounded-sm text-gray-200 font-montserrat text-xs p-2 font-extrabold ">
-                    {{
-                        currentSession }}</h2>
+                <h2 class="lg:ml-20 ml-6 pt-10 pb-3 text-blue-500 font-montserrat text-md mt-2 font-extrabold">dropit</h2>
+                <div class="flex pt-3">
+                    
+                    <h2
+                        class="mr-7 mt-10  h-8 lg:mr-20 bg-blue-800 rounded-sm text-gray-200 font-montserrat text-xs p-2 font-extrabold ">
+                        {{
+                            currentSession }}</h2>
+                </div>
             </div>
             <div class="flex flex-col">
 
@@ -58,12 +65,13 @@
             </div>
 
 
-            <div class="ml-4 mr-4 mb-10 lg:w-110 w-80 h-8 rounded-sm bg-gray-7 00 fixed bottom-0 flex items-center justify-between">
+            <div
+                class="ml-4 mr-4 mb-10 lg:w-110 w-80 h-8 rounded-sm bg-gray-7 00 fixed bottom-0 flex items-center justify-between">
                 <div class="flex ">
                     <i class="mt-4 ml-2 mb-2 text-4xl text-green-500 mr-1">&#8226;</i>
                     <h4 class="mt-8 font-montserrat font-extrabold text-white text-xs"> connected</h4>
                 </div>
-                
+
                 <div class="lg:flex hidden mb-2">
                     <h4 class="mt-8 font-montserrat font-extrabold text-red-600 text-xs"> close</h4>
                 </div>
@@ -115,16 +123,16 @@ export default {
         console.log(token)
         //const storedMessages = JSON.parse(localStorage.getItem('receivedMessages'));
 
-            this.socket = new WebSocket(`ws://127.0.0.1:8000/socket?session_key=${code}`)
-            this.socket.onmessage = (msg) => {
-        
-                    this.receivedMsg.push(msg.data); // Add the message if it doesn't exist
+        this.socket = new WebSocket(`ws://127.0.0.1:8000/socket?session_key=${code}`)
+        this.socket.onmessage = (msg) => {
 
-                    this.receivedMsg.reverse();
-                }
-            }
-        
-    
+            this.receivedMsg.push(msg.data); // Add the message if it doesn't exist
+
+            this.receivedMsg.reverse();
+        }
+    }
+
+
 }
 
 </script>

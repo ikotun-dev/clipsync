@@ -1,15 +1,17 @@
 <template>
-    <div class="bg-gray-950 pt-4 lg:pt-10 h-screen">
-        <div class="flex px--10 justify-between space-x-52 mx-4 lg:mx-24">
+    <div class="bg-gray-950 pt-10 lg:pt-10 h-screen lg:px-36 ">
+        <div class="flex  justify-between space-x-6 lg:space-x-52 mx-4 lg:mx-24">
             <div>
-                <h3 class="font-montserrat font-extrabold text-blue-700 text-xl">dropit</h3>
+                <h3 class="font-montserrat font-extrabold text-blue-700 ml-4 mt-2 text-md">dropit</h3>
             </div>
 
             <div class="flex justify-center items-center space-x-3">
+                <RouterLink to="session">
                 <div
                     class="w-42 bg-blue-600 p-2 rounded-md flex justify-center text-gray-200 font-lato text-sm cursor-pointer">
                     Create session &#9203;
                 </div>
+            </RouterLink>
                 <div class="bg-blue-600 p-2 rounded-md">
                     &#128589;
                 </div>
@@ -42,7 +44,7 @@
                     <h4 class="">12 : 34 PM</h4>
                 </div>
 
-                <div class="w-20 p-2  flex justify-center">
+                <div class="w-20 p-2 hidden lg:flex justify-center">
                     <div class="bg-blue-600 px-4 py-1 rounded-sm hover:bg-blue-900 cursor-pointer ">
                         View
                     </div>
@@ -55,11 +57,11 @@
                     <h4 class="">190402319399</h4>
                 </div>
 
-                <div class="w-72">
+                <div class="w-36 lg:w-72">
                     <h4 class="">12 : 34 PM</h4>
                 </div>
 
-                <div class="w-20 p-2  flex justify-center">
+                <div class="w-20 p-2  hidden lg:flex justify-center ">
                     <div class="bg-blue-600 px-4 py-1 rounded-sm hover:bg-blue-900 cursor-pointer ">
                         View
                     </div>
