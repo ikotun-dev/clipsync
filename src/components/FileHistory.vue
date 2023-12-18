@@ -3,7 +3,7 @@
             <h3 class="font-montserrat font-extrabold text-gray-500 mb-4">File History</h3>
 
             <div
-                class="w-full rounded-md bg-gray-700 p-3 text-sm font-lato text-gray-300 flex items-center justify-between space-x-20 mb-2">
+                class="w-full rounded-md bg-gray-700 p-3 text-sm font-montserrat text-gray-300 flex items-center justify-between space-x-20 mb-2">
                 <div class="w-36 ">
                     <h4 class="">document1.docx</h4>
                 </div>
@@ -20,7 +20,7 @@
             </div>
 
             <div
-                class="w-full rounded-md bg-gray-700 p-3 text-sm font-lato text-gray-300 flex items-center justify-between space-x-20">
+                class="w-full rounded-md bg-gray-700 p-3 text-sm font-montserrat text-gray-300 flex items-center justify-between space-x-20">
                 <div class="w-36 ">
                     <h4 class="">file1.jpg</h4>
                 </div>

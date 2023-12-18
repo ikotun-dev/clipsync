@@ -8,7 +8,7 @@
             <div class="flex justify-center items-center space-x-3">
                 <RouterLink to="session">
                 <div
-                    class="w-42 bg-blue-600 p-2 rounded-md flex justify-center text-gray-200 font-lato text-sm cursor-pointer">
+                    class="w-42 bg-blue-600 p-2 rounded-md flex justify-center text-gray-200 font-montserrat text-sm cursor-pointer">
                     Create session &#9203;
                 </div>
             </RouterLink>
@@ -21,17 +21,17 @@
             <div
                 class="px-5  text-gray-400 hover:text-gray-100  hover:border-blue-400 cursor-pointer" :class="{ 'border-blue-600 border-b-2' : showSessionHistory  }"
                 @click="toogleSessionHistory">
-                <h3 class=" font-lato ">Sessions</h3>
+                <h3 class=" font-montserrat ">Sessions</h3>
             </div>
             <div
                 class="px-5  text-gray-400 hover:text-gray-100  hover:border-blue-400 cursor-pointer" :class="{ 'border-blue-600 border-b-2' : showFileHistory }"
                 @click="toogleFileHistory"> 
-                <h3 class=" font-lato ">Files</h3>
+                <h3 class=" font-montserrat ">Files</h3>
             </div>
             <div
                 class="px-5  text-gray-400 hover:text-gray-100 border-blue-600 hover:border-blue-400 cursor-pointer" :class="{ 'border-blue-600 border-b-2' : showTextHistory }"
                 @click="toogleTextHistory">
-                <h3 class=" font-lato ">Texts</h3>
+                <h3 class=" font-montserrat ">Texts</h3>
             </div>
         </div>
         <SessionHistory v-show="showSessionHistory === true"></SessionHistory>
