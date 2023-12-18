@@ -33,7 +33,7 @@
                 </div>
 
                 <h4 class="lg:ml-20 ml-6 text-sm text-white font-montserrat font-bold">Type here</h4>
-
+                <i></i>
                 <input v-model="boxContent"
                     class="expandable-input text-gray-200 mt-2 mx-6 lg:ml-20 lg:mr-20 bg-gray-600 rounded-md focus:bg-gray-700 lg:max-h-100 lg:h-16 text-xs h-14 focus:outline-none p-3 font-pop"
                     type="text" />
