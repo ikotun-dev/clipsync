@@ -4,15 +4,17 @@
         </ShareSession>
         <div style="height: auto; min-height: 70rem;" class="pb-20  lg:px-36  bg-gray-950">
             <div class="pt-12">
-            <a class="lg:ml-20 ml-4 pt-10 pb-3 text-blue-600 font-montserrat text-sm font-thin mr-4 cursor-pointer" @click="$router.go(-1)"> &#x25c0; back</a>
+                <a class="lg:ml-20 ml-4 pt-10 pb-3 text-blue-600 font-montserrat text-sm font-thin mr-4 cursor-pointer"
+                    @click="$router.go(-1)"> <i class="fa-solid fa-backward"></i> back</a>
             </div>
 
             <div class="flex justify-between">
                 <h2 class="lg:ml-20 ml-6 pt-10 pb-3 text-blue-500 font-montserrat text-md mt-2 font-extrabold">dropit</h2>
                 <div class="flex pt-3">
-                    
+
                     <h2
-                        class="mr-7 mt-10  h-8 lg:mr-20 bg-blue-800 rounded-sm text-gray-200 font-montserrat text-xs p-2 font-extrabold ">collins
+                        class="mr-7 mt-10  h-8 lg:mr-20 bg-blue-800 rounded-sm text-gray-200 font-montserrat text-xs p-2 font-extrabold ">
+                        collins
                         {{
                             currentSession }}</h2>
                 </div>
@@ -31,12 +33,22 @@
                     class="hidden lg:block ml-1  h-8 lg:mr-2rounded-lg text-gray-900 font-montserrat mt-1 text-xs lg:text-xs  font-extrabold ">
                     share</h2>-->
                 </div>
+                <font-awesome-icon :icon="['fas', 'upload']" />
 
-                <h4 class="lg:ml-20 ml-6 text-sm text-white font-montserrat font-bold">Type here</h4>
+
+
+                <h4 class="lg:ml-20 ml-6 text-sm text-gray-200 font-montserrat font-bold">Input file or text</h4>
                 <i></i>
-                <input v-model="boxContent"
-                    class="expandable-input text-gray-200 mt-2 mx-6 lg:ml-20 lg:mr-20 bg-gray-600 rounded-md focus:bg-gray-700 lg:max-h-100 lg:h-16 text-xs h-14 focus:outline-none p-3 font-pop"
-                    type="text" />
+                <div class="flex items-center mt-2 mx-6 lg:ml-20 lg:mr-20 bg-gray-600 rounded-md focus:bg-gray-700 h-auto cursor-pointer">
+                    <div class="flex items-center cursor-pointer">
+                        <i class="ml-6 fa-solid fa-upload text-gray-300 text-xl cursor-pointer" @click="openFileInput()"></i>
+                        <input type="file" ref="fileInput" class="hidden" @change="handleFileChange()" />
+                    </div>
+
+                    <input v-model="boxContent"
+                        class="expandable-input text-gray-200 mt-1 mx-6 lg:ml-4 lg:mr-4 bg-gray-600 rounded-md focus: lg:w-full lg:max-h-100 lg:h-14 text-xs h-14 focus:outline-none p-3 font-pop"
+                        type="text" />
+                </div>
                 <button @click="sendMessage()"
                     class="absolute right-2 lg:mt-56 mt-47  font-extrabold font-montserrat  text-white mr-4 lg:mr-54 bg-blue-500 w-20 h-8 rounded-sm text-xs hover:bg-blue-800">send</button>
             </div>
@@ -113,7 +125,17 @@ export default {
             navigator.clipboard.writeText(message);
             this.copied = true
             setTimeout(() => { this.copied = false }, 500)
-        }
+        },
+        openFileInput() {
+            this.$refs.fileInput.click();
+        },
+        handleFileChange() {
+            const fileInput = this.$refs.fileInput;
+            const selectedFile = fileInput.files[0];
+
+            // Do something with the selected file, for example, display its name
+            alert(`Selected file: ${selectedFile.name}`);
+        },
     },
 
     mounted() {

@@ -13,7 +13,7 @@
                 </div>
             </RouterLink>
                 <div class="bg-blue-600 p-2 rounded-md">
-                    &#128589;
+                    <i class="fa-solid fa-user-shield text-white"></i>
                 </div>
             </div>
         </div>
