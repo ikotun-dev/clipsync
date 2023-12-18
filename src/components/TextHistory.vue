@@ -1,11 +1,11 @@
 <template>
     <div class="mt-3 flex flex-col  px-10 lg:mx-24">
-            <h3 class="font-montserrat font-extrabold text-gray-500 mb-4">Files History</h3>
+            <h3 class="font-montserrat font-extrabold text-gray-500 mb-4">Text History</h3>
 
             <div
                 class="w-full rounded-md bg-gray-700 p-3 text-sm font-lato text-gray-300 flex items-center justify-between space-x-20 mb-2">
                 <div class="w-36 ">
-                    <h4 class="">document1.docx</h4>
+                    <h4 class="">jlbjljnljjjnljj</h4>
                 </div>
 
                 <div class="w-72">
@@ -22,7 +22,7 @@
             <div
                 class="w-full rounded-md bg-gray-700 p-3 text-sm font-lato text-gray-300 flex items-center justify-between space-x-20">
                 <div class="w-36 ">
-                    <h4 class="">file1.jpg</h4>
+                    <h4 class="">kj  khh k  </h4>
                 </div>
 
                 <div class="w-36 lg:w-72">

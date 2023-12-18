@@ -19,27 +19,36 @@
         </div>
         <div class="mt-12 pb-10 flex justify-center space-x-10">
             <div
-                class="px-5 border-b-2 text-gray-400 hover:text-gray-100 border-blue-600 hover:border-blue-400 cursor-pointer">
+                class="px-5  text-gray-400 hover:text-gray-100  hover:border-blue-400 cursor-pointer" :class="{ 'border-blue-600 border-b-2' : showSessionHistory  }"
+                @click="toogleSessionHistory">
                 <h3 class=" font-lato ">Sessions</h3>
             </div>
             <div
-                class="px-5 border-b-2 text-gray-400 hover:text-gray-100 border-blue-600 hover:border-blue-400 cursor-pointer">
+                class="px-5  text-gray-400 hover:text-gray-100  hover:border-blue-400 cursor-pointer" :class="{ 'border-blue-600 border-b-2' : showFileHistory }"
+                @click="toogleFileHistory"> 
                 <h3 class=" font-lato ">Files</h3>
             </div>
             <div
-                class="px-5 border-b-2 text-gray-400 hover:text-gray-100 border-blue-600 hover:border-blue-400 cursor-pointer">
+                class="px-5  text-gray-400 hover:text-gray-100 border-blue-600 hover:border-blue-400 cursor-pointer" :class="{ 'border-blue-600 border-b-2' : showTextHistory }"
+                @click="toogleTextHistory">
                 <h3 class=" font-lato ">Texts</h3>
             </div>
         </div>
-        <SessionHistory></SessionHistory>
-        
+        <SessionHistory v-show="showSessionHistory === true"></SessionHistory>
+        <FileHistory v-show="showFileHistory === true"></FileHistory>
+        <TextHistory v-show="showTextHistory === true"></TextHistory>
 </div></template>
 
 <script>
 import SessionHistory from './SessionHistory'
+import FileHistory from './FileHistory'
+import TextHistory from './TextHistory'
+
 export default { 
     components : { 
-        SessionHistory
+        SessionHistory,
+        FileHistory,
+        TextHistory
     },
     data() { 
         return {
