@@ -7,18 +7,18 @@ import SignUp from './components/SignUp.vue'
 import UserDashboard from './components/UserDashboard.vue'
 
 
-const routes = [ 
-    { 'path' : '/' ,  component : MainPage },
-    { 'path' : '/newjs' ,  component : HeaderTop },
-    {'path' : '/session', component : MajorPage},
-    {'path' : '/session/join', component: JoinSession},
-    {'path' : '/new', component: SignUp},
-    {'path' : '/dashboard', component: UserDashboard}
-    
+const routes = [
+    { 'path': '/', component: MainPage },
+    { 'path': '/create-session', component: HeaderTop },
+    { 'path': '/session', component: MajorPage },
+    { 'path': '/session/join', component: JoinSession },
+    { 'path': '/new', component: SignUp },
+    { 'path': '/dashboard', component: UserDashboard }
+
 ]
 
 const router = createRouter({
-   history : createWebHashHistory('clipsync'), routes
+    history: createWebHashHistory('clipsync'), routes
 })
 
 export default router

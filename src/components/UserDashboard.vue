@@ -7,7 +7,7 @@
             </div>
             </RouterLink>
             <div class="flex justify-center items-center space-x-3">
-                <RouterLink to="session">
+                <RouterLink to="create-session">
                 <div
                     class=" bg-blue-600 p-2 rounded-md hover:bg-blue-800 text-gray-200 font-montserrat text-sm cursor-pointer">
                     <i class="fa-solid fa-folder-plus text-xl"></i>

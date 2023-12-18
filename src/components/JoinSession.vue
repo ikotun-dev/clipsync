@@ -12,7 +12,7 @@
         <div class=" mb-10 flex flex-col items-center justify-center">
             <!-- <img class="w-20" :src="require('../assets/logoclip2.png')"> -->
 
-            <h2 class="text-white font-montserrat font-bold mt-4">Join an Ongoing Session</h2>
+            <h2 class="text-white font-montserrat font-bold mt-4">Join an ongoing session</h2>
             <h3 class="text-gray-500 font-montserrat text-xs lg:text-sm font-bold mt-4">This is session key for ongoing
                 session</h3>
 

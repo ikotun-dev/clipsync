@@ -1,9 +1,17 @@
 <template>
-    <div class="h-screen bg-gray-900 flex flex-col items-center justify-center ">
-        <RouterLink to="/">
-            <h2 class="text-blue-500 text-xl font-montserrat font-extrabold  absolute top-10 left-0 ml-10 lg:ml-20">dropit
+    <div class="h-screen bg-gray-950 flex flex-col items-center justify-center ">
+        <div class="flex justify-between items-center">
+            <RouterLink to="/">
+            <h2 class="text-blue-500 text-xl font-montserrat font-extrabold  absolute top-10 left-0 ml-10 lg:ml-20 ">dropit
             </h2>
         </RouterLink>
+        <RouterLink to="/">
+            <div class=" bg-blue-600 p-2 rounded-md hover:bg-blue-800 text-gray-200 font-montserrat text-sm cursor-pointer  absolute top-10 right-0 mr-10 lg:mr-20">
+               <i class="fa-solid fa-user-shield text-xl"></i>
+        </div>
+        </RouterLink>
+        </div>
+      
 
         <!-- <div class="w-100 ml-20 hidden md:mr-14 md:block">
             <img :src="require('../assets/pana.png')">
@@ -12,12 +20,12 @@
         <div class=" mb-10 flex flex-col items-center justify-center">
             <!-- <img class="w-20" :src="require('../assets/logoclip2.png')"> -->
 
-            <h2 class="text-white font-montserrat font-bold mt-4">Enter your session code</h2>
+            <h2 class="text-white font-montserrat font-bold mt-4">Enter session code</h2>
             <h3 class="text-gray-500 font-montserrat text-xs lg:text-sm font-bold mt-4">This is unique to your session and
                 restricts access</h3>
 
             <input v-model="sessionToken" @input="validateInput"
-                class="mt-4 w-72 p-2 rounded-md focus:outline-none font-semibold font-pop focus:ring-4 focus:ring-blue-500"
+                class="animate-shake mt-4 w-72 p-2 rounded-md focus:outline-none font-semibold font-pop focus:ring-4 focus:ring-blue-500"
                 type="text" />
             <h4 v-show="short_code == true" class="text-red-600 font-montserrat mt-2 font-extrabold">Code is less than 8
                 characters </h4>
@@ -27,14 +35,16 @@
                 code </h4>
             <h4 v-show="sessionAlreadyExist == true" class="text-red-600 font-montserrat mt-2 font-extrabold text-sm">Session with this Code is Ongoing
                  </h4>
+            <RouterLink to="session">
             <button v-if="processing == false"
                 class="mt-4 w-72 h-10 bg-blue-800 rounded-md font-montserrat font-extrabold text-center text-gray-300 text-md hover:bg-blue-600"
                 @click="InitiateSession()">Initiate Session</button>
+            
             <button v-else class="h-10 rounded-md w-72 mt-4 py-1 bg-blue-500 flex items-center justify-center">
                 <div class=" animate-spin rounded-full  border-4 w-6 h-6 border-white border-t-gray-600 border-opacity-100 ">
                 </div>
             </button>
-
+            </RouterLink>
 
         </div>
         <div class="absolute bottom-0 ">

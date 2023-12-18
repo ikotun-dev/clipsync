@@ -45,21 +45,19 @@
 
 
         </div>
-        <div class="absolute bottom-0 ">
-            <FooterButtom></FooterButtom>
-        </div>
+        
 
     </div>
 </template>
 
 <script>
 import axios from 'axios';
-import FooterButtom from './FooterButtom.vue'
+//import FooterButtom from './FooterButtom.vue'
 //import VueNativeSock from 'vue-native-websocket';
 
 export default {
     components: {
-        FooterButtom
+       // FooterButtom
     },
 
     data() {
