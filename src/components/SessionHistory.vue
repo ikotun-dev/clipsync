@@ -1,6 +1,6 @@
 <template>
     <div class="mt-3 flex flex-col  px-10 lg:mx-24">
-            <h3 class="font-montserrat font-extrabold text-gray-500 mb-4">Sessions History</h3>
+            <h3 class="font-montserrat font-extrabold text-gray-500 mb-4">Session History</h3>
 
             <div
                 class="w-full rounded-md bg-gray-700 p-3 text-sm font-lato text-gray-300 flex items-center justify-between space-x-20 mb-2">
