@@ -28,7 +28,7 @@
                 class="px-5  text-gray-400 hover:text-gray-100  hover:border-blue-400 cursor-pointer" :class="{ 'border-blue-600 border-b-2' : showFileHistory }"
                 @click="toogleFileHistory"> 
                 <h3 class=" font-montserrat ">Files</h3>
-            </div>
+        </div>
             <div
                 class="px-5  text-gray-400 hover:text-gray-100 border-blue-600 hover:border-blue-400 cursor-pointer" :class="{ 'border-blue-600 border-b-2' : showTextHistory }"
                 @click="toogleTextHistory">

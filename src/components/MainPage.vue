@@ -30,7 +30,7 @@
             <img class="lg:w-[90vh] w-[40vh]" :src="require('../assets/mockupFolder.png')">
         </div>
         <div class="mt-12 flex justify-center lg:hidden md:hidden">
-            <img class="lg:w-[90vh] w-[40vh]" :src="require('../assets/mock2.png')">
+            <img class="lg:w-[100vh] w-[90vh]" :src="require('../assets/mock2.png')">
         </div>
         <plansSection>
 

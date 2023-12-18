@@ -14,18 +14,19 @@
                         <h4 class="font-montserrat text-blue-600 mb-2">&#x2715; Cannot view shared media Content</h4>
                         <h4 class="font-montserrat text-blue-600 mb-2">&#x2715; Cannot export to desired file format</h4>
                     </div>
-
-                    <button
-                        class=" hover:bg-gray-800 bg-blue-950 p-3  rounded-md mt-20 text-white font-montserrat text-sm">
-                        Join &nbsp; &#x1F680;
-                    </button>
+                    <RouterLink to="/new">
+                        <button
+                            class=" hover:bg-gray-800 bg-blue-950 p-3  rounded-md mt-20 text-white font-montserrat text-sm">
+                            Join &nbsp; &#x1F680;
+                        </button>
+                    </RouterLink>
                 </div>
 
 
             </div>
 
             <div
-            class="shadow-blue flex-col lg:h-96 h-99 w-80 lg:w-96 bg-gray-900  hover:border-blue-950 rounded-md flex  border border-gray-600 mb-12">
+                class="shadow-blue flex-col lg:h-96 h-99 w-80 lg:w-96 bg-gray-900  hover:border-blue-950 rounded-md flex  border border-gray-600 mb-12">
                 <h3 class="text-lg font-extrabold text-montserrat text-blue-500 mt-4 ml-4">Pro &#127942;</h3>
                 <div class="mt-5 border-t border-gray-600 p-3">
                     <div class="p-1">
@@ -37,17 +38,20 @@
                         <h4 class="font-montserrat text-gray-300 mb-2">&#9432; Can export data to desired file format</h4>
                         <h4 class="font-montserrat text-gray-300 mb-2">&#9432; Verified checkmark</h4>
                     </div>
-            
-                <button
-                    class=" hover:bg-gray-800 bg-blue-950 p-3  rounded-md mt-12 text-white font-montserrat text-sm items-center">
-                    Join  &nbsp; &#x1F680;
-                </button>
+                    <RouterLink to="/new">
+                        <button
+                            class=" hover:bg-gray-800 bg-blue-950 p-3  rounded-md mt-12 text-white font-montserrat text-sm items-center">
+                            Join &nbsp; &#x1F680;
+                        </button>
+                    </RouterLink>
                 </div>
             </div>
         </div>
     </div>
 </template>
-<style scoped>.shadow-blue {
+<style scoped>
+.shadow-blue {
     box-shadow: 0 8px 10px rgba(7, 97, 162, 0.765);
     /* Adjust values as needed */
-}</style>
+}
+</style>
