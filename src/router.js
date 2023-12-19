@@ -5,7 +5,7 @@ import MainPage from './components/MainPage.vue'
 import JoinSession from './components/JoinSession.vue'
 import SignUp from './components/SignUp.vue'
 import UserDashboard from './components/UserDashboard.vue'
-
+import LoginPage from './components/LoginPage.vue'
 
 const routes = [
     { 'path': '/', component: MainPage },
@@ -13,8 +13,8 @@ const routes = [
     { 'path': '/session', component: MajorPage },
     { 'path': '/session/join', component: JoinSession },
     { 'path': '/new', component: SignUp },
-    { 'path': '/dashboard', component: UserDashboard }
-
+    { 'path': '/dashboard', component: UserDashboard },
+    { 'path': '/login', component: LoginPage}
 ]
 
 const router = createRouter({
