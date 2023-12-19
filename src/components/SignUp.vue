@@ -98,7 +98,7 @@ export default {
     
         ValidateCredentials() {
             const password = this.password
-            if (this.password.length == 0) {
+            if (this.password.trim().length == 0) {
                 this.no_value = true;
                 console.log("pwd validation failed")
                 setTimeout(() => { this.no_value = false; }, 4000)
