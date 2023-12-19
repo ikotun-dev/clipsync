@@ -24,20 +24,20 @@
              <div class="flex flex-col mb-2">
                    
                 <input v-model="email" 
-                    class="mt-2 w-72 p-2 rounded-md text-xs font-extrabold text-blue-800 font-montserrat focus:bg-gray-200 border border-3 border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="h-10 mt-2 w-72 p-2 rounded-md text-xs font-extrabold text-blue-800 font-montserrat focus:bg-gray-200 border border-3 border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     type="email" placeholder="Email" required/>
             </div>
 
             <div class="flex flex-col">
                
                 <input v-model="username" 
-                    class="mt-2 w-72 p-2 rounded-md text-xs font-extrabold text-gray-950 text-bold font-montserrat focus:bg-gray-200 border border-3 border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="h-10 mt-2 w-72 p-2 rounded-md text-xs font-extrabold text-gray-950 text-bold font-montserrat focus:bg-gray-200 border border-3 border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     type="text" placeholder="Username" required/>
             </div>
             <div class="mt-2 flex flex-col">
                
                 <input v-model="password" 
-                    class="mt-2 w-72 font-montserrat text-xs font-extrabold text-blue-800 p-2 rounded-md focus:bg-gray-200 border border-3 border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="h-10 mt-2 w-72 font-montserrat text-xs font-extrabold text-blue-800 p-2 rounded-md focus:bg-gray-200 border border-3 border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     type="text" placeholder="Password" required/>
             </div>
             <h4 v-show="short_code == true" class="text-red-600 font-montserrat mt-2 font-extrabold text-xs">Password is less than 8 characters
@@ -48,7 +48,7 @@
 
             <button v-if="processing == false"
                type="submit"
-                class="lg:mt-3 mt-4 w-72 h-10 bg-blue-900 rounded-md font-montserrat font-extrabold text-center text-gray-300 text-xs lg:text-xs hover:bg-blue-600"
+                class="lg:mt-5 mt-4 w-72 h-10 bg-blue-900 rounded-md font-montserrat font-extrabold text-center text-gray-300 text-xs lg:text-xs hover:bg-blue-600"
                 @click="ValidateCredentials()"
                 >Join Waitlist &#x1F680;</button>
             <button v-else class="h-10 rounded-md w-72 mt-4 py-1 bg-blue-500 flex items-center justify-center">

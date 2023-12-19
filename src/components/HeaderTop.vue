@@ -1,10 +1,12 @@
 <template>
     <div class="h-screen bg-gray-950 flex flex-col items-center justify-center ">
         <div class="flex justify-between items-center">
-            <RouterLink to="/">
-            <h2 class="text-blue-500 text-xl font-montserrat font-extrabold  absolute top-10 left-0 ml-10 lg:ml-20 ">dropit
+           
+            <h2 @click="$router.go(-1)" class="text-blue-500 text-sm font-montserrat font-extrabold  absolute top-12 left-0 ml-10 lg:ml-20 cursor-pointer "> &LessLess; Back 
             </h2>
-        </RouterLink>
+       
+
+      
         <RouterLink to="/">
             <div class=" bg-blue-600 p-2 rounded-md hover:bg-blue-800 text-gray-200 font-montserrat text-sm cursor-pointer  absolute top-10 right-0 mr-10 lg:mr-20">
                <i class="fa-solid fa-user-shield text-xl"></i>
@@ -20,8 +22,8 @@
         <div class=" mb-10 flex flex-col items-center justify-center">
             <!-- <img class="w-20" :src="require('../assets/logoclip2.png')"> -->
 
-            <h2 class="text-white font-montserrat font-bold mt-4">Enter session code</h2>
-            <h3 class="text-gray-500 font-montserrat text-xs lg:text-sm font-bold mt-4">This is unique to your session and
+            <h2 class="text-white font-montserrat font-bold mt-4">Open a new drop</h2>
+            <h3 class="text-gray-500 font-montserrat text-xs lg:text-sm font-bold mt-4">This is unique to your drop and
                 restricts access</h3>
 
             <input v-model="sessionToken" @input="validateInput"
@@ -35,16 +37,15 @@
                 code </h4>
             <h4 v-show="sessionAlreadyExist == true" class="text-red-600 font-montserrat mt-2 font-extrabold text-sm">Session with this Code is Ongoing
                  </h4>
-            <RouterLink to="session">
+ 
             <button v-if="processing == false"
                 class="mt-4 w-72 h-10 bg-blue-800 rounded-md font-montserrat font-extrabold text-center text-gray-300 text-md hover:bg-blue-600"
-                @click="InitiateSession()">Initiate Session</button>
+                @click="InitiateSession()">Initiate drop</button>
             
             <button v-else class="h-10 rounded-md w-72 mt-4 py-1 bg-blue-500 flex items-center justify-center">
-                <div class=" animate-spin rounded-full  border-4 w-6 h-6 border-white border-t-gray-600 border-opacity-100 ">
+                <div class=" animate-spin rounded-full  border-4 w-6 h-6 border-white border-b-gray-400 border-opacity-100 ">
                 </div>
             </button>
-            </RouterLink>
 
         </div>
         <div class="absolute bottom-0 ">
@@ -58,6 +59,7 @@
 import axios from 'axios';
 import FooterButtom from './FooterButtom.vue'
 //import VueNativeSock from 'vue-native-websocket';
+import Vuecookies from 'vue-cookie';
 
 export default {
     components: {
@@ -106,10 +108,10 @@ export default {
 
             try {
                 this.processing = true
-                const res = await axios.post('http://127.0.0.1:8000/new', sessionData, {
+                const res = await axios.post('http://127.0.0.1:8000/', sessionData, {
                     headers: {
                         'Content-Type': 'application/json',
-                        // 'Authorization': 'Bearer my-authorization-token'
+                         'Authorization': `Bearer ${Vuecookies.get('token')}`
                     }
                 })
                 if (res.status == 201) {

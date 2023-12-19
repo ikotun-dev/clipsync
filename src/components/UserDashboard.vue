@@ -21,15 +21,15 @@
         </div>
         <div class="mt-12 pb-10 flex justify-center space-x-10">
             <div class="px-5  text-gray-400 hover:text-gray-100  hover:border-blue-400 cursor-pointer"
-                :class="{ 'border-blue-600 border-b-2': showSessionHistory }" @click="toogleSessionHistory">
-                <h3 class=" font-montserrat ">Sessions</h3>
+                :class="{ 'border-blue-600 border-b-2  font-extrabold': showSessionHistory}" @click="toogleSessionHistory">
+                <h3 class=" font-montserrat ">Drops</h3>
             </div>
             <div class="px-5  text-gray-400 hover:text-gray-100  hover:border-blue-400 cursor-pointer"
-                :class="{ 'border-blue-600 border-b-2': showFileHistory }" @click="toogleFileHistory">
+                :class="{ 'border-blue-600 border-b-2 font-extrabold': showFileHistory }" @click="toogleFileHistory">
                 <h3 class=" font-montserrat ">Files</h3>
             </div>
             <div class="px-5  text-gray-400 hover:text-gray-100 border-blue-600 hover:border-blue-400 cursor-pointer"
-                :class="{ 'border-blue-600 border-b-2': showTextHistory }" @click="toogleTextHistory">
+                :class="{ 'border-blue-600 border-b-2 font-extrabold': showTextHistory }" @click="toogleTextHistory">
                 <h3 class=" font-montserrat ">Texts</h3>
             </div>
         </div>
@@ -37,10 +37,11 @@
         <FileHistory v-show="showFileHistory === true"></FileHistory>
         <TextHistory v-show="showTextHistory === true"></TextHistory>
    
-       
-        <div class="bottom-4 absolute center">
-            <FooterButtom></FooterButtom>
+       <RouterLink to="create-session">
+       <div class="absolute font-extrabold bottom-10 right-7 lg:right-25 hover:bg-gray-800 bg-gray-700 px-5 py-4 rounded-full cursor-pointer">
+        <i class="text-white fas fa-plus font-extrabold"></i>
         </div>
+       </RouterLink>
     </div>
    
 </template>
@@ -49,13 +50,13 @@
 import SessionHistory from './SessionHistory'
 import FileHistory from './FileHistory'
 import TextHistory from './TextHistory'
-import FooterButtom from './FooterButtom.vue'
+//import FooterButtom from './FooterButtom.vue'
 export default {
     components: {
         SessionHistory,
         FileHistory,
         TextHistory,
-        FooterButtom
+        //FooterButtom
     },
     data() {
         return {
