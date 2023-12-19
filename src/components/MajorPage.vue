@@ -40,8 +40,8 @@
                 <h4 class="lg:ml-20 ml-6 text-sm text-gray-200 font-montserrat font-bold">Input file or text</h4>
                 <i></i>
                 <div class="flex items-center mt-2 mx-6 lg:ml-20 lg:mr-20 bg-gray-600 rounded-md focus:bg-gray-700 h-auto cursor-pointer">
-                    <div class="flex items-center cursor-pointer">
-                        <i class="ml-6 fa-solid fa-upload text-gray-300 text-xl cursor-pointer" @click="openFileInput()"></i>
+                    <div class="flex items-center cursor-pointer text-white">
+                        <i class="ml-6 fa-solid fa-upload hover:text-blue-200 text-white text-xl cursor-pointer" @click="openFileInput()"></i>
                         <input type="file" ref="fileInput" class="hidden" @change="handleFileChange()" />
                     </div>
 

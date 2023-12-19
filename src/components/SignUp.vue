@@ -9,43 +9,64 @@
             <img :src="require('../assets/pana.png')">
         </div> -->
 
-        <div class=" mb-10 flex flex-col items-center justify-center">
+        <div class=" mb-10 flex flex-col items-center justify-cente bg-gray-950">
             <!-- <img class="w-20" :src="require('../assets/logoclip2.png')"> -->
 
-            <h2 class="text-blue-900 font-montserrat font-extrabold text-lg  mb-2">Join dropit :) </h2>
+            <h2 class="text-blue-400 font-montserrat font-extrabold text-lg  mb-2">Join dropit :) </h2>
+            <div v-show="signupSucess === true">
+                <h4 class="text-blue-400 font-montserrat font-extrabold text-sm lg:text-md mb-1 mt-1 "> Yayy, Spot reserved 🎉 </h4>
+            </div>
+            <div v-show="existingUser === true">
+                <h4 class="text-blue-400 font-montserrat font-extrabold text-sm lg:text-md mb-1 mt-1 "> User already exists  </h4>
+            </div>
              <h3 class="text-gray-500 font-montserrat text-xs hidden lg:text-xs font-bold my-2 mb-3">Reserve your username and get notified when its your turn  &#128521; </h3> 
-            <div class="flex flex-col mb-2">
-                <label class="font-montserrat text-xs text-extrabold text-blue-400">Email</label>
+       <form >
+             <div class="flex flex-col mb-2">
+                   
                 <input v-model="email" 
-                    class="mt-2 w-72 p-2 rounded-md focus:bg-gray-200 border border-3 border-blue-600 focus:outline-none font-semibold  focus:ring-2 focus:ring-blue-500"
-                    type="text" placeholder="" />
+                    class="mt-2 w-72 p-2 rounded-md text-xs font-extrabold text-blue-800 font-montserrat focus:bg-gray-200 border border-3 border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    type="email" placeholder="Email" required/>
             </div>
 
             <div class="flex flex-col">
-                <label class="font-montserrat text-xs text-extrabold text-blue-400"> Username</label>
+               
                 <input v-model="username" 
-                    class="mt-2 w-72 p-2 rounded-md focus:bg-gray-200 border border-3 border-blue-600 focus:outline-none font-semibold  focus:ring-2 focus:ring-blue-500"
-                    type="text" placeholder="" />
+                    class="mt-2 w-72 p-2 rounded-md text-xs font-extrabold text-gray-950 text-bold font-montserrat focus:bg-gray-200 border border-3 border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    type="text" placeholder="Username" required/>
             </div>
-
-            <h4 v-show="short_code == true" class="text-red-600 font-montserrat mt-2 font-extrabold">Code is less than 8
+            <div class="mt-2 flex flex-col">
+               
+                <input v-model="password" 
+                    class="mt-2 w-72 font-montserrat text-xs font-extrabold text-blue-800 p-2 rounded-md focus:bg-gray-200 border border-3 border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    type="text" placeholder="Password" required/>
+            </div>
+            <h4 v-show="short_code == true" class="text-red-600 font-montserrat mt-2 font-extrabold">Password is less than 8 characters
                 characters </h4>
             <h4 v-show="notAlpha == true" class="text-red-600 font-montserrat mt-2 font-bold">Code is not a valid character
                 ! </h4>
-            <h4 v-show="no_value == true" class="text-red-600 font-montserrat mt-2 font-extrabold">Enter a valid session
+            <h4 v-show="no_value == true" class="text-red-600 font-montserrat mt-2 font-extrabold">Enter a valid password
                 code </h4>
 
             <button v-if="processing == false"
-                class="mt-12 w-72 h-10 bg-blue-900 rounded-md font-montserrat font-extrabold text-center text-gray-300 text-md hover:bg-blue-600"
-                @click="joinSession()">Join Waitlist &#x1F680;</button>
+            type="submit"
+                class="lg:mt-12 mt-6 w-72 h-10 bg-blue-900 rounded-md font-montserrat font-extrabold text-center text-gray-300 text-xs lg:text-xs hover:bg-blue-600"
+                @click="ValidateCredentials()"
+                >Join Waitlist &#x1F680;</button>
             <button v-else class="h-10 rounded-md w-72 mt-4 py-1 bg-blue-500 flex items-center justify-center">
                 <div class=" animate-spin rounded-full  border-b-4 border-t-4 w-6 h-6 border-white border-opacity-100 ">
                 </div>
             </button>
-
+            <RouterLink to="/">
+            <div class="flex justify-center">
+                <h5 class="text-blue-300 font-montserrat text-xs mt-3">&#8617; &nbsp; Go to home</h5>
+            </div>
+            </RouterLink>
+</form>
 
         </div>
-        
+
+           
+
 
     </div>
 </template>
@@ -70,55 +91,51 @@ export default {
             short_code: false,
             notAlpha: false,
             sessionAlreadyExist: false,
+            signupSucess : false,
+            existingUser : false
         }
     },
     methods: {
-        validateInput() {
-            // Remove space characters from the input
-            this.sessionToken = this.sessionToken.replace(/[\s!@#$%^&*()_+[\]\\{}|;':",.<>?]/g, '');
-
-            // You can also add additional validation logic here if needed
-        },
-
-
-        InitiateSession() {
-            const token = this.sessionToken
-            if (this.sessionToken.length == 0) {
+    
+        ValidateCredentials() {
+            const password = this.password
+            if (this.password.length == 0) {
                 this.no_value = true;
 
                 setTimeout(() => { this.no_value = false; }, 4000)
             }
-            else if (token.length > 1 && token.length < 8) {
+            else if (password.length > 1 && password.length < 8) {
                 this.short_code = true;
                 setTimeout(() => { this.short_code = false; }, 4000)
             }
             else {
-                this.joinSession()
+                this.signUp()
             }
 
         },
-        async joinSession() {
-            const sessionData = {
-                'code': this.sessionToken
+        async signUp() {
+            const userData = {
+                'email' : this.email,
+                'username' : this.username,
+                'password' : this.password
             };
             let res;
             try {
                 this.processing = true
-                res = await axios.post('http://127.0.0.1:8000/check', sessionData, {
+                res = await axios.post('http://localhost:8000/user/signup', userData, {
                     headers: {
                         'Content-Type': 'application/json',
                         // 'Authorization': 'Bearer my-authorization-token'
                     }
                 })
-                if (res.status == 200) {
-                    const token = res.data.token
-                    const code = res.data.code
-                    localStorage.setItem('access_token', token)
-                    localStorage.setItem('session_code', code)
-                    console.log(token)
+                if (res.status == 201) {
+                    this.signupSucess = true;
+                    setTimeout(() => { this.signupSucess = false; }, 5000)
                     // Handle the 409 conflict error
-                    this.$router.push('/session')
-
+                }
+                 if (res.status == 200) {
+                    this.existingUser = true;
+                    setTimeout(() => { this.existingUser = false; }, 5000)
                 }
             }
             catch (error) {

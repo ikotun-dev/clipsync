@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="mt-12 mb-10  justify-center hidden md:flex lg:flex ">
-            <img class="lg:w-[90vh] w-[40vh]" :src="require('../assets/mockupFolder.png')">
+            <img class="lg:w-[90vh] w-[100vh]" :src="require('../assets/mockupFolder.png')">
         </div>
         <div class="mt-12 flex justify-center lg:hidden md:hidden">
             <img class="lg:w-[100vh] w-[90vh]" :src="require('../assets/mock2.png')">
@@ -35,62 +35,7 @@
         <plansSection>
 
         </plansSection>
-        <!-- <div class="mt-1 mb-12 flex justify-center ">
-            <div class="h-24 rounded-lg shadow-inner">
-                <div class="blur-none flex ">
-                     <div class=" mr-4 ">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                            stroke="white" class="w-12 h-12">
-                            <path strokeLinecap="round" strokeLinejoin="round"
-                                d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div> 
-
-                    <div>
-                        <h4 class="text-md mb-2 lg:text-2xl mt-4 lg:mt-2 font-montserrat font-semibold text-gray-400 ">
-                            Steps to
-                            Create a
-                            session</h4>
-                        <div class="mr-10">
-                            <div class="flex mt-3 ">
-
-                                <li
-                                    class="text-xs lg:text-lg lg:mt-0 mt-2  font-montserrat font-semibold text-gray-200 hover:text-blue-600 ">
-                                    Click
-                                    Create
-                                    Session Button</li>
-                            </div>
-                            <div class="flex mt-3">
-                              
-                                <li
-                                    class="text-xs lg:text-lg mt-2 lg:mt-0  font-montserrat font-semibold text-gray-300 hover:text-blue-600 ">
-                                    Create ( 8 )
-                                    Digit
-                                    Session Code</li>
-
-                            </div>
-                            <div class="flex mt-3 hover:text-blue-600">
-                        
-                                <li
-                                    class="text-xs lg:text-lg mt-1 lg:mt-0  font-montserrat font-semibold text-gray-300 hover:text-blue-600">
-                                    Begin Your Session
-                            </li>
-                            </div>
-
-                            <div class="flex mt-3">
-                           
-                                <li class="text-xs lg:text-lg mt-1 lg:mt-0 font-montserrat font-semibold text-gray-300 hover:text-blue-600">Share Files
-                                    or Text
-                                </li>
-
-
-                            </div>
-
-                    </div>
-                </div>
-
-            </div> 
-        </div>-->
+        
 </div>
 <FooterButtom></FooterButtom></template>
 <script>
