@@ -40,16 +40,15 @@
                     class="mt-2 w-72 font-montserrat text-xs font-extrabold text-blue-800 p-2 rounded-md focus:bg-gray-200 border border-3 border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     type="text" placeholder="Password" required/>
             </div>
-            <h4 v-show="short_code == true" class="text-red-600 font-montserrat mt-2 font-extrabold">Password is less than 8 characters
+            <h4 v-show="short_code == true" class="text-red-600 font-montserrat mt-2 font-extrabold text-xs">Password is less than 8 characters
                 characters </h4>
-            <h4 v-show="notAlpha == true" class="text-red-600 font-montserrat mt-2 font-bold">Code is not a valid character
+            <h4 v-show="notAlpha == true" class="text-red-600 font-montserrat mt-2 font-bold text-xs">Code is not a valid character
                 ! </h4>
-            <h4 v-show="no_value == true" class="text-red-600 font-montserrat mt-2 font-extrabold">Enter a valid password
-                code </h4>
+            <h4 v-show="no_value == true" class="text-red-600 font-montserrat mt-2 font-extrabold text-xs">Enter a valid password </h4>
 
             <button v-if="processing == false"
-            type="submit"
-                class="lg:mt-12 mt-6 w-72 h-10 bg-blue-900 rounded-md font-montserrat font-extrabold text-center text-gray-300 text-xs lg:text-xs hover:bg-blue-600"
+               type="submit"
+                class="lg:mt-3 mt-4 w-72 h-10 bg-blue-900 rounded-md font-montserrat font-extrabold text-center text-gray-300 text-xs lg:text-xs hover:bg-blue-600"
                 @click="ValidateCredentials()"
                 >Join Waitlist &#x1F680;</button>
             <button v-else class="h-10 rounded-md w-72 mt-4 py-1 bg-blue-500 flex items-center justify-center">
@@ -101,7 +100,7 @@ export default {
             const password = this.password
             if (this.password.length == 0) {
                 this.no_value = true;
-
+                console.log("pwd validation failed")
                 setTimeout(() => { this.no_value = false; }, 4000)
             }
             else if (password.length > 1 && password.length < 8) {
@@ -131,6 +130,9 @@ export default {
                 if (res.status == 201) {
                     this.signupSucess = true;
                     setTimeout(() => { this.signupSucess = false; }, 5000)
+                    this.email ='',
+                    this.password =''
+                    this.username =''
                     // Handle the 409 conflict error
                 }
                  if (res.status == 200) {
@@ -139,10 +141,10 @@ export default {
                 }
             }
             catch (error) {
-                if (error.response && error.response.status === 409) {
-
-                    //this.sessionAlreadyExist = true;
-                    setTimeout(() => { this.sessionAlreadyExist = false }, 4000);
+                if (error.response && error.response.status === 400) {
+                    console.log(res.data)
+                    this.existingUser = true;
+                    setTimeout(() => { this.existingUser = false }, 4000);
                 } else {
                     // Handle other errors
                     console.error('An error occurred:', error);
