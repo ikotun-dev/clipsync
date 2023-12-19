@@ -13,13 +13,7 @@
             <!-- <img class="w-20" :src="require('../assets/logoclip2.png')"> -->
 
             <h2 class="text-blue-400 font-montserrat font-extrabold text-lg  mb-2"> Hi there :) </h2>
-            <div v-show="signupSucess === true">
-                <h4 class="text-blue-400 font-montserrat font-extrabold text-sm lg:text-md mb-1 mt-1 "> Yayy, Spot reserved 🎉 </h4>
-            </div>
-            <div v-show="existingUser === true">
-                <h4 class="text-blue-400 font-montserrat font-extrabold text-sm lg:text-md mb-1 mt-1 "> User already exists  </h4>
-            </div>
-            
+         
        <form >
         
 
@@ -35,16 +29,13 @@
                     class="mt-2 w-72 font-montserrat text-xs font-extrabold text-blue-800 p-2 rounded-md focus:bg-gray-200 border border-3 border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     type="text" placeholder="Password" required/>
             </div>
-            <h4 v-show="short_code == true" class="text-red-600 font-montserrat mt-2 font-extrabold text-xs">Password is less than 8 characters
-                characters </h4>
-            <h4 v-show="notAlpha == true" class="text-red-600 font-montserrat mt-2 font-bold text-xs">Code is not a valid character
-                ! </h4>
+    
             <h4 v-show="no_value == true" class="text-red-600 font-montserrat mt-2 font-extrabold text-xs">Enter a valid password </h4>
-
+            <h4 v-show="invalidCredentials === true " class="text-red-600 font-montserrat mt-2 ml-2 font-extrabold text-xs">invalid Credentials </h4>
             <button v-if="processing == false"
                type="submit"
                 class="lg:mt-3 mt-4 w-72 h-10 bg-blue-900 rounded-md font-montserrat font-extrabold text-center text-gray-300 text-xs lg:text-xs hover:bg-blue-600"
-                @click="ValidateCredentials()"
+                @click="Login()"
                 >Go in &#x1F680;</button>
             <button v-else class="h-10 rounded-md w-72 mt-4 py-1 bg-blue-500 flex items-center justify-center">
                 <div class=" animate-spin rounded-full  border-b-4 border-t-4 w-6 h-6 border-white border-opacity-100 ">
@@ -66,6 +57,7 @@
 </template>
 
 <script>
+import VueCookies from 'vue-cookie'
 import axios from 'axios';
 //import FooterButtom from './FooterButtom.vue'
 //import VueNativeSock from 'vue-native-websocket';
@@ -84,8 +76,8 @@ export default {
             no_value: false,
             short_code: false,
             notAlpha: false,
-            sessionAlreadyExist: false,
-            signupSucess : false,
+            loginSuccess : false,
+            invalidCredentials : false,
             existingUser : false
         }
     },
@@ -121,18 +113,24 @@ export default {
                         // 'Authorization': 'Bearer my-authorization-token'
                     }
                 })
-                if (res.status == 200) {
-                    this.signupSucess = true;
-                    setTimeout(() => { this.signupSucess = false; }, 5000)
+                if (res.status === 200) {
+                    this.loginSuccess = true;
+                    VueCookies.set('token', res.data.token);
+                    this.$router.push('/dashboard')
                     this.email ='',
                     this.password =''
                     this.username =''
                     // Handle the 409 conflict error
+                } else { 
+                    this.invalidCredentials = true;
+                    setTimeout(() => { this.invalidCredentials = false; }, 5000)
                 }
             
             }
             catch (error) {
                     // Handle other errors
+                    this.invalidCredentials = true;
+                    setTimeout(() => { this.invalidCredentials = false; }, 5000)
                     console.error('An error occurred:', error);
                 
             }
