@@ -103,28 +103,25 @@ export default {
         },
         async createSession() {
             const sessionData = {
-                'code': this.sessionToken
+                'sessionCode': this.sessionToken
             };
 
             try {
                 this.processing = true
-                const res = await axios.post('http://127.0.0.1:8000/', sessionData, {
+                const res = await axios.post('http://127.0.0.1:8000/user/create-session', sessionData, {
                     headers: {
                         'Content-Type': 'application/json',
                          'Authorization': `Bearer ${Vuecookies.get('token')}`
                     }
                 })
                 if (res.status == 201) {
-                    const token = res.data.token
-                    const code = res.data.code
-                    localStorage.setItem('access_token', token)
-                    localStorage.setItem('session_code', code)
-                    console.log(token)
-                    this.$router.push('/session')
+                    console.log(res.data)
+                    this.$router.push({ name: 'session', params: { code: this.sessionData.sessionCode } });
+                    this.$store.state.sessionCode = sessionData.sessionCode
                 }
             }
             catch (error) {
-                if (error.response && error.response.status === 409) {
+                if (error.response && error.response.status === 400) {
                     // Handle the 409 conflict error
                     this.sessionAlreadyExist = true;
                     setTimeout(() => { this.sessionAlreadyExist = false }, 4000);

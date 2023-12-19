@@ -14,9 +14,7 @@
 
                     <h2
                         class="mr-7 mt-10  h-8 lg:mr-20 bg-blue-800 rounded-sm text-gray-200 font-montserrat text-xs p-2 font-extrabold ">
-                        collins
-                        {{
-                            currentSession }}</h2>
+                     {{ $store.state.sessionCode }}</h2>
                 </div>
             </div>
             <div class="flex flex-col">
@@ -109,6 +107,12 @@ export default {
             receivedMsg: [],
             shareSessionComponent: false,
 
+        }
+    },
+    props : {
+        code : { 
+            type : String,
+            required : true
         }
     },
     methods: {
