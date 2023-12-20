@@ -8,11 +8,11 @@
                     <h4 class="">{{ session.sessionCode }}</h4>
                 </div>
 
-                <div class="">
+                <div class="hidden lg:block">
                     <h4 class="font-mono">{{ new Date(session.createdAt).toLocaleString() }}</h4>
                 </div>
 
-                <div class="w-20 p-2 hidden lg:flex justify-center">
+                <div class="w-20 p-2  lg:flex justify-center">
                     <div class="bg-gray-500 px-4 py-1 rounded-sm hover:bg-blue-900 cursor-pointer " @click="goToSession(session._id)">
                         View
                     </div>

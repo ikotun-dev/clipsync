@@ -146,11 +146,11 @@ export default {
 
         this.socket.onmessage = (msg) => {
             const message = msg;
-
+            const validMessage = JSON.parse(msg.data);
             // Check if the session code of the received message matches the current session code
             if (this.sessionCode) {
                 console.log('Received message:', message);
-                this.receivedMsg = [...this.receivedMsg, message];
+                this.receivedMsg = [...this.receivedMsg, validMessage.text];
                 this.receivedMsg.reverse();
             }
         }
