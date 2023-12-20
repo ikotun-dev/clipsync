@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="w-20 p-2  lg:flex justify-center">
-                    <div class="bg-gray-500 px-4 py-1 rounded-sm hover:bg-blue-900 cursor-pointer " @click="goToSession(session._id)">
+                    <div class="bg-gray-500 px-4 py-1 rounded-sm hover:bg-blue-900 cursor-pointer " @click="goToSession(session)">
                         View
                     </div>
                 </div>
@@ -36,8 +36,8 @@ export default {
         }
     },
     methods : { 
-        goToSession(id) { 
-            this.$router.push(`/session/${id}`)
+        goToSession(session) { 
+            this.$router.push(`/session/${session._id}/${session.sessionCode}`)
 
         },
 

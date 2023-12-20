@@ -14,12 +14,12 @@
 
                     <h2
                         class="mr-7 mt-10  h-8 lg:mr-20 bg-blue-800 rounded-sm text-gray-200 font-montserrat text-xs p-2 font-extrabold ">
-                        {{ sessionCode }}</h2>
+                        {{ sessionVal }}</h2>
                 </div>
             </div>
             <div class="flex flex-col">
 
-                <div class="flex  lg:ml-20  ml-6 mt-4 mb-3 h-8 lg:h-8 lg:w-12 w-12 rounded-sm px-4 pt-2  bg-blue-900 hover:bg-blue-500 cursor-pointer"
+                <div class="flex  lg:ml-20  ml-6 mt-4 mb-3 h-8 lg:h-8 lg:w-12 w-12 rounded-sm px-4 pt-2  bg-blue-900 hover:bg-gray-900 cursor-pointer"
                     @click="openShareModal">
 
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -40,7 +40,7 @@
                 <div
                     class="flex items-center mt-2 mx-6 lg:ml-20 lg:mr-20 bg-gray-600 rounded-md focus:bg-gray-700 h-auto cursor-pointer">
                     <div class="flex items-center cursor-pointer text-white">
-                        <i class="ml-6 fa-solid fa-upload hover:text-blue-200 text-white text-xl cursor-pointer"
+                        <i class="ml-6 fa-solid fa-upload hover:text-gray-950 text-gray-100 text-xl cursor-pointer"
                             @click="openFileInput()"></i>
                         <input type="file" ref="fileInput" class="hidden" @change="handleFileChange()" />
                     </div>
@@ -50,12 +50,15 @@
                         type="text" />
                 </div>
                 <button @click="sendMessage()"
-                    class="absolute right-2 lg:mt-56 mt-47  font-extrabold font-montserrat  text-white mr-4 lg:mr-54 bg-blue-500 w-20 h-8 rounded-sm text-xs hover:bg-blue-800">send</button>
+                    class="absolute right-2 lg:mt-56 mt-47  font-extrabold font-montserrat  text-white mr-4 lg:mr-54 bg-blue-900 w-20 h-8 rounded-md text-xs hover:bg-gray-800">send</button>
             </div>
             <div class="flex flex-col mt-20">
-                <h4 class="lg:ml-20 ml-6 mt-10 text-sm text-gray-400 font-montserrat font-bold">History</h4>
+                <div class="flex items-center mt-10">
+                <h4 class="lg:ml-20 ml-6  text-sm text-gray-400 font-montserrat font-bold">History</h4>
+                <!-- <h4 class="ml-3 text-xl">&#128214;</h4> -->
+                </div>
 
-                <div v-for="(message, index) in receivedMsg" :key="index" style="height: 100%; overflow-y: auto;"
+                <div v-for="(message, index) in reversedMessages" :key="index" style="height: 100%; overflow-y: auto;"
                     class="flex text-gray-200 mt-2 mx-6 lg:ml-20 lg:mr-20 bg-blue-950 opacity-3 rounded-md text-xs focus:outline-none p-4 pt-4 font-pop">
 
                     <h2 class="mr-20">{{ message }}</h2> <!-- Display only the 'text' property -->
@@ -109,7 +112,7 @@ export default {
             copiedStates: [] // Array to store copied state for each message
         }
     },
-    props: ['sessionId'],
+    props: ['sessionId', 'sessionVal'],
 
     methods: {
         sendMessage() {
@@ -169,15 +172,14 @@ export default {
                 if (this.sessionCode) {
                     console.log('Received message:', validMessage);
                     this.receivedMsg = [...this.receivedMsg, validMessage.text];
-                    this.receivedMsg.reverse();
+                   
                 }
             } catch (e) {
                 console.log('Received message:', msg);
                 this.receivedMsg = [...this.receivedMsg, msg.data];
-                this.receivedMsg.reverse();
             }
             // Check if the session code of the received message matches the current session code
-
+      
         }
 
         // Event handler for socket errors
@@ -188,11 +190,11 @@ export default {
         this.copiedStates = new Array(this.receivedMsg.length).fill(false);
     },
     computed: {
-        filteredMessages() {
-            return this.receivedMsg.filter(
-                (message) => message && message.text && message.timestamp
-            );
+        reversedMessages() {
+            // Reverse the array before displaying it
+            return this.receivedMsg.slice().reverse();
         }
+    
     },
 
 

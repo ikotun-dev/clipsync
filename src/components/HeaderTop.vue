@@ -119,7 +119,7 @@ export default {
                     Vuecookies.set('sessionId', res.data.savedSession._id)
                     //set sessionCode 
                     Vuecookies.set('sessionCode', sessionData.sessionCode)
-                    this.$router.push({ name: 'session', params: { code: this.sessionToken } });
+                    this.$router.push({ name: 'session', params: { code: this.sessionToken, sessionVal : Vuecookies.get('sessionCode') } });
                     //this.$store.state.sessionCode = sessionData.sessionCode
                 }
             }
