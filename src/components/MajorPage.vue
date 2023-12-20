@@ -56,17 +56,18 @@
                 <h4 class="lg:ml-20 ml-6 mt-10 text-sm text-gray-400 font-montserrat font-bold">History</h4>
 
                 <div v-for="(message, index) in receivedMsg" :key="index" style="height: 100%; overflow-y: auto;"
-                    class="flex text-gray-200 mt-2 mx-6 lg:ml-20 lg:mr-20 bg-blue-950 opacity-3 rounded-md text-xs focus:outline-none p-4 pt-6 font-pop">
-                    <h2 class="mr-20 text-xs" v-if="copied === true">copied</h2>
+                    class="flex text-gray-200 mt-2 mx-6 lg:ml-20 lg:mr-20 bg-blue-950 opacity-3 rounded-md text-xs focus:outline-none p-4 pt-4 font-pop">
+
                     <h2 class="mr-20">{{ message }}</h2> <!-- Display only the 'text' property -->
 
-                    <div @click="copyMessage(message.text)"
-                        class="cursor-pointer w-10 ml-6 lg:mr-24 mr-10 absolute right-0 ">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="white" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
-                        </svg>
+                    <div v-if="copiedStates[index]"
+                        class="cursor-pointer w-10 ml-6 lg:mr-2 lg:right-60 mr-10 absolute right-0 ">
+                        <i class="fa-solid fa-clipboard-check text-lg"></i>
+                    </div>
+
+                    <div v-else @click="copyMessage(index)"
+                        class="cursor-pointer w-10 ml-6 lg:mr-2 lg:right-60 mr-10 absolute right-0 ">
+                        <i class="fa-solid fa-copy text-lg"></i>
                     </div>
                 </div>
             </div>
@@ -105,7 +106,7 @@ export default {
             sCode: "",
             receivedMsg: [],
             shareSessionComponent: false,
-
+            copiedStates: [] // Array to store copied state for each message
         }
     },
     props: ['sessionId'],
@@ -118,13 +119,29 @@ export default {
         openShareModal() {
             this.shareSessionComponent = true;
         },
-        copyMessage(index) {
+        // copyMessage(index) {
 
+        //     const message = this.receivedMsg[index];
+        //     navigator.clipboard.writeText(message);
+        //     this.copied = true
+        //     setTimeout(() => { this.copied = false }, 500)
+        // },
+        copyMessage(index) {
             const message = this.receivedMsg[index];
             navigator.clipboard.writeText(message);
-            this.copied = true
-            setTimeout(() => { this.copied = false }, 500)
+
+            // Set copied state just for this index
+            this.copiedStates[index] = true;
+
+            setTimeout(() => {
+                // Reset the copied state after a delay
+                // Clear after delay
+                this.copiedStates[index] = false;
+            }, 4000);
         },
+        // Other methods...
+        // Other methods..
+
         openFileInput() {
             this.$refs.fileInput.click();
         },
@@ -145,20 +162,30 @@ export default {
         this.socket = new WebSocket(`ws://localhost:8000/${this.sessionCode}?token=${Vuecookies.get('token')}`)
 
         this.socket.onmessage = (msg) => {
-            const message = msg;
-            const validMessage = JSON.parse(msg.data);
-            // Check if the session code of the received message matches the current session code
-            if (this.sessionCode) {
-                console.log('Received message:', message);
-                this.receivedMsg = [...this.receivedMsg, validMessage.text];
+            //   const message = ms;
+ 
+            try {
+                const validMessage = JSON.parse(msg.data);
+                if (this.sessionCode) {
+                    console.log('Received message:', validMessage);
+                    this.receivedMsg = [...this.receivedMsg, validMessage.text];
+                    this.receivedMsg.reverse();
+                }
+            } catch (e) {
+                console.log('Received message:', msg);
+                this.receivedMsg = [...this.receivedMsg, msg.data];
                 this.receivedMsg.reverse();
             }
+            // Check if the session code of the received message matches the current session code
+
         }
 
         // Event handler for socket errors
         this.socket.onerror = (error) => {
             console.error('WebSocket error:', error);
         };
+
+        this.copiedStates = new Array(this.receivedMsg.length).fill(false);
     },
     computed: {
         filteredMessages() {
