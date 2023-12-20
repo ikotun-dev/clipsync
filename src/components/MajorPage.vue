@@ -38,7 +38,7 @@
                 <h4 class="lg:ml-20 ml-6 text-sm text-gray-200 font-montserrat font-bold">Input file or text</h4>
                 <i></i>
                 <div
-                    class="flex items-center mt-2 mx-6 lg:ml-20 lg:mr-20 bg-gray-600 rounded-md focus:bg-gray-700 h-auto cursor-pointer">
+                    class="flex items-center mt-2 mx-6 lg:mx-20 bg-gray-600 rounded-md focus:bg-gray-700 h-auto cursor-pointer">
                     <div class="flex items-center cursor-pointer text-white">
                         <i class="ml-6 fa-solid fa-upload hover:text-gray-950 text-gray-100 text-xl cursor-pointer"
                             @click="openFileInput()"></i>
@@ -46,13 +46,20 @@
                     </div>
 
                     <input v-model="boxContent" @input="validateInput"
-                        class="expandable-input text-gray-200 mt-1 mx-6 lg:ml-4 lg:mr-4 bg-gray-600 rounded-md focus: w-full lg:w-full lg:max-h-100 lg:h-14 text-xs h-14 focus:outline-none p-3 font-pop"
+                        class="expandable-input text-gray-200 mt-1 mx-1 lg:mx-1 bg-gray-600 rounded-md focus: w-full lg:w-full lg:max-h-100 lg:h-14 text-xs h-14 focus:outline-none p-3 font-pop"
                         type="text" />
 
                     <i v-show="no_value === true" class="text-red-500 fa-solid fa-circle-exclamation mr-4 text-3xl"></i>
                 </div>
+                <div v-show="selectedFileName" class="flex items-center mx-8 lg:mx-20 mt-2">
+                    <i class="fas fa-file text-2xl text-white "></i>
+                    <h4 class="lg:ml-2 ml-2 text-sm text-gray-200 font-montserrat mt-2  font-bold mb-2">{{ selectedFileName
+                    }}</h4>
+
+                </div>
+
                 <button @click="sendMessage()"
-                    class="absolute right-2 lg:mt-56 mt-47  font-extrabold font-montserrat  text-white mr-4 lg:mr-54 bg-blue-900 w-20 h-8 rounded-md text-xs hover:bg-gray-800">send</button>
+                    class="absolute right-2 lg:mt-52 mt-48  font-extrabold font-montserrat  text-white mr-4 lg:mr-54 bg-blue-900 w-20 h-8 rounded-md text-xs hover:bg-gray-800">send</button>
             </div>
             <div class="flex flex-col mt-20">
                 <div class="flex items-center mt-10">
@@ -67,12 +74,12 @@
 
                     <div v-if="copiedStates[index]"
                         class="cursor-pointer w-10 ml-6 lg:mr-2 lg:right-60 mr-8 absolute right-0 ">
-                        <i class="fa-solid fa-clipboard-check text-lg text-gray-950"></i>
+                        <i class="fa-solid fa-clipboard-check text-lg "></i>
                     </div>
 
                     <div v-else @click="copyMessage(index)"
                         class="cursor-pointer w-10 ml-6 lg:mr-2 lg:right-60 mr-8 absolute right-0 ">
-                        <i class="fa-solid fa-copy text-lg text-white hover:text-gray-950"></i>
+                        <i class="fa-solid fa-copy text-lg text-white "></i>
                     </div>
                 </div>
             </div>
@@ -112,51 +119,85 @@ export default {
             no_value: false,
             receivedMsg: [],
             shareSessionComponent: false,
-            copiedStates: [] // Array to store copied state for each message
+            copiedStates: [], // Array to store copied state for each message
+            selectedFileName: "",
+            fileSent: false,
+            textSent: false
         }
     },
     props: ['sessionId', 'sessionVal'],
 
     methods: {
+        //function for handling file changes 
+        handleFileChange() {
+            const fileInput = this.$refs.fileInput;
+            const selectedFile = fileInput.files[0];
+
+            // Set the selected file name
+            this.selectedFileName = selectedFile.name;
+            //  alert(`Selected file: ${selectedFile.name}`);
+            // ... (other logic, if needed) ...
+        },
         validateInput() {
             const input = this.boxContent
-            if (input.trim().length == 0) {
+            if (input.trim().length == 0 && this.selectedFileName.trim().length == 0) {
                 this.no_value = true;
                 console.log("pwd validation failed")
                 setTimeout(() => { this.no_value = false; }, 4000)
-            }
-            else if (input.length > 1 && input.length < 8) {
-                this.short_code = true;
-                setTimeout(() => { this.short_code = false; }, 4000)
-            }
-            else {
-                this.signUp()
-            }
 
+            } else {
+                this.no_value = false
+            }
         },
 
         sendMessage() {
-            this.validateInput()
-
+            this.validateInput();
             if (!this.no_value) {
                 // Proceed to send the content to the server via WebSocket
-                const contentToSend = this.boxContent;
-                this.socket.send(contentToSend); // Assuming this.socket is your WebSocket instance
-                console.log('Sending to server:', contentToSend);
+                if (this.selectedFileName && !this.fileSent) {
+                    console.log("File selected: " + this.selectedFileName);
+
+                    // Handle sending the file via the socket
+                    const fileInput = this.$refs.fileInput;
+                    const selectedFile = fileInput.files[0];
+                    const fileReader = new FileReader();
+
+                    fileReader.onload = () => {
+                        // Send the file content via the socket
+                        const fileContent = fileReader.result;
+                        console.log('Received file content:', typeof fileContent);
+
+                        // Check if the fileContent is an ArrayBuffer before sending
+                        if (fileContent instanceof ArrayBuffer) {
+                            this.socket.send(fileContent);
+                            console.log("file is also a Array buffer array")
+                            this.fileSent = true;
+                        } else {
+                            console.error('Error: File content is not an ArrayBuffer.');
+                        }
+                    };
+
+                    // Read the file as an ArrayBuffer
+                    fileReader.readAsArrayBuffer(selectedFile);
+
+                } if (this.boxContent && !this.textSent) {
+                    // Handle regular text message
+
+
+                    const content = this.boxContent
+
+                    console.log("Message to send: " + (content));
+                    this.socket.send(content);
+                    this.textSent = true;
+                    this.boxContent = "";
+                }
             }
         },
         openShareModal() {
             this.shareSessionComponent = true;
         },
-        // copyMessage(index) {
-
-        //     const message = this.receivedMsg[index];
-        //     navigator.clipboard.writeText(message);
-        //     this.copied = true
-        //     setTimeout(() => { this.copied = false }, 500)
-        // },
         copyMessage(index) {
-            const message = this.receivedMsg[index];
+            const message = this.reversedMessages[index];
             navigator.clipboard.writeText(message);
 
             // Set copied state just for this index
@@ -168,20 +209,13 @@ export default {
                 this.copiedStates[index] = false;
             }, 4000);
         },
-        // Other methods...
-        // Other methods..
-
         openFileInput() {
             this.$refs.fileInput.click();
         },
-        handleFileChange() {
-            const fileInput = this.$refs.fileInput;
-            const selectedFile = fileInput.files[0];
 
-            // Do something with the selected file, for example, display its name
-            alert(`Selected file: ${selectedFile.name}`);
-        },
     },
+
+
     //retrieve user token and pass int into the socket 
     // do some stuffs 
 
@@ -192,22 +226,41 @@ export default {
 
         this.socket.onmessage = (msg) => {
             //   const message = ms;
-
+            console.log(typeof msg)
             try {
-                const validMessage = JSON.parse(msg.data);
-                if (this.sessionCode) {
-                    console.log('Received message:', validMessage);
-                    this.receivedMsg = [...this.receivedMsg, validMessage.text];
+                const isBinary = msg.data instanceof ArrayBuffer;
 
+                if (isBinary) {
+                    // Handle binary data (e.g., display image, save to Cloudinary, etc.)
+                    const blob = new Blob([msg.data]);
+                    // Process the blob as needed
+                    console.log('Received binary data:', blob);
+                } else {
+                    // Handle regular text message
+                    let validMessage
+                    console.log(msg)
+                    try {
+                        validMessage = JSON.parse(msg);
+
+                        if (this.sessionCode && validMessage) {
+                            console.log('Received message:', validMessage);
+                            this.receivedMsg = [...this.receivedMsg, validMessage.text];
+                        } else {
+                            console.warn('Invalid message structure:', validMessage);
+                            // Handle messages without "text" property or invalid structure
+                        }
+                    } catch (jsonParseError) {
+                        // If JSON parsing fails, treat msg.data as plain text
+                        console.log('Error parsing JSON. Treating as plain text:', msg.data);
+                        this.receivedMsg = [...this.receivedMsg, msg.data];
+                        validMessage = null;
+                    }
                 }
             } catch (e) {
-                console.log('Received message:', msg);
-                this.receivedMsg = [...this.receivedMsg, msg.data];
+                console.log('Error handling message:', e.message);
             }
             // Check if the session code of the received message matches the current session code
-
         }
-
         // Event handler for socket errors
         this.socket.onerror = (error) => {
             console.error('WebSocket error:', error);

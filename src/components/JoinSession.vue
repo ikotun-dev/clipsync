@@ -25,7 +25,7 @@
                 ! </h4>
             <h4 v-show="no_value == true" class="text-red-600 font-montserrat mt-2 font-extrabold">Enter a valid session
                 code </h4>
-                <h4 v-show="sessionNotExisting === true" class="text-red-600 font-montserrat mt-2 text-sm font-extrabold">Drop not found </h4>
+                <h4 v-show="sessionNotExisting === true" class="text-red-600 font-montserrat mt-2 text-xs font-extrabold">Drop does not exist  </h4>
 
             <button v-if="processing == false"
                 class="mt-4 w-72 h-10 bg-blue-800 rounded-md font-montserrat font-extrabold text-center text-gray-300 text-md hover:bg-blue-600"
