@@ -34,11 +34,11 @@
             <h4 v-show="invalidCredentials === true " class="text-red-600 font-montserrat mt-2 ml-2 font-extrabold text-xs">invalid Credentials </h4>
             <button v-if="processing == false"
                type="submit"
-                class="lg:mt-3 mt-4 w-72 h-10 bg-blue-900 rounded-md font-montserrat font-extrabold text-center text-gray-300 text-xs lg:text-xs hover:bg-blue-600"
+                class="lg:mt-3 mt-2 w-72 h-10 bg-blue-900 rounded-md font-montserrat font-extrabold text-center text-gray-300 text-xs lg:text-xs hover:bg-blue-600"
                 @click="Login()"
                 >Go in &#x1F680;</button>
             <button v-else class="h-10 rounded-md w-72 mt-4 py-1 bg-blue-500 flex items-center justify-center">
-                <div class=" animate-spin rounded-full  border-b-4 border-t-4 w-6 h-6 border-white border-opacity-100 ">
+                <div class=" aanimate-spin rounded-full  border-4 w-6 h-6 border-white border-b-gray-400 border-opacity-100  ">
                 </div>
             </button>
             <RouterLink to="/">

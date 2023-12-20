@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-gray-950 pt-10 lg:pt-10 h-screen ">
+    <div class="bg-gray-950 pt-10 lg:pt-10 min-h-screen pb-20 ">
 
         <div class="flex  justify-between space-x-6 lg:space-x-52 mx-4 lg:mx-24">
             <RouterLink to="/">
@@ -38,7 +38,7 @@
         <TextHistory v-show="showTextHistory === true"></TextHistory>
    
        <RouterLink to="create-session">
-       <div class="absolute font-extrabold bottom-10 right-7 lg:right-25 hover:bg-gray-800 bg-gray-700 px-5 py-4 rounded-full cursor-pointer">
+       <div class="fixed border-gray-950 font-extrabold bottom-10 right-7 lg:right-25 hover:bg-gray-900 bg-gray-800 px-5 py-4 rounded-full cursor-pointer">
         <i class="text-white fas fa-plus font-extrabold"></i>
         </div>
        </RouterLink>
@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import Vuecookies from 'vue-cookie'
 import SessionHistory from './SessionHistory'
 import FileHistory from './FileHistory'
 import TextHistory from './TextHistory'
@@ -66,6 +67,12 @@ export default {
         }
     },
     methods: {
+        checkAuth() { 
+            const token = Vuecookies.get('token')
+            if (!token) { 
+                this.$router.push('/login')
+            }
+        },
         toogleSessionHistory() {
             this.showSessionHistory = true,
                 this.showFileHistory = false,
@@ -81,6 +88,10 @@ export default {
                 this.showFileHistory = false,
                 this.showTextHistory = true
         }
+    },
+
+    mounted() { 
+        this.checkAuth();
     }
 }
 

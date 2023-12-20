@@ -2,12 +2,12 @@
     <div class="pb-40 pt-4 lg:pt-10 px-10 bg-gray-950">
         <div class="flex flex-col items-center justify-between">
             <div class="flex mt-6 mb-12 lg:justify-between items-center ">
-                <h3 class="text-blue-600 font-montserrat font-extrabold text-xl">dropit</h3>
-                <div class="lg:w-[120vh] md:w-[50vh] w-[8vh] "></div>
+                <h3 class="text-blue-600 font-montserrat font-extrabold text-xl">dropit&#x21BA;</h3>
+                <div class="lg:w-[80vh] md:w-[50vh] w-[8vh] "></div>
                 <RouterLink to="/login">
                 <h3
                  
-                    class="text-gray-950 font-montserrat border border-blue-800 rounded-lg text-xs  lg:px-0 h-8 pt-2 hover:bg-blue-900 cursor-pointer bg-gray-300 w-20 lg:w-20 mr-2 text-center">
+                    class="text-gray-950 hover:text-white hover:text-extrabold font-montserrat border border-blue-800 rounded-lg text-xs  lg:px-0 h-8 pt-2 hover:bg-blue-900 cursor-pointer bg-gray-300 w-20 lg:w-20 mr-2 text-center">
                     Go in &#x1F680;</h3>
                 </RouterLink>
 

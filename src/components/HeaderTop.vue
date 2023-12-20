@@ -116,8 +116,11 @@ export default {
                 })
                 if (res.status == 201) {
                     console.log(res.data)
-                    this.$router.push({ name: 'session', params: { code: this.sessionData.sessionCode } });
-                    this.$store.state.sessionCode = sessionData.sessionCode
+                    Vuecookies.set('sessionId', res.data.savedSession._id)
+                    //set sessionCode 
+                    Vuecookies.set('sessionCode', sessionData.sessionCode)
+                    this.$router.push({ name: 'session', params: { code: this.sessionToken } });
+                    //this.$store.state.sessionCode = sessionData.sessionCode
                 }
             }
             catch (error) {

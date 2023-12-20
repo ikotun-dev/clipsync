@@ -14,7 +14,7 @@
 
                     <h2
                         class="mr-7 mt-10  h-8 lg:mr-20 bg-blue-800 rounded-sm text-gray-200 font-montserrat text-xs p-2 font-extrabold ">
-                     {{ $store.state.sessionCode }}</h2>
+                        {{ sessionCode }}</h2>
                 </div>
             </div>
             <div class="flex flex-col">
@@ -37,14 +37,16 @@
 
                 <h4 class="lg:ml-20 ml-6 text-sm text-gray-200 font-montserrat font-bold">Input file or text</h4>
                 <i></i>
-                <div class="flex items-center mt-2 mx-6 lg:ml-20 lg:mr-20 bg-gray-600 rounded-md focus:bg-gray-700 h-auto cursor-pointer">
+                <div
+                    class="flex items-center mt-2 mx-6 lg:ml-20 lg:mr-20 bg-gray-600 rounded-md focus:bg-gray-700 h-auto cursor-pointer">
                     <div class="flex items-center cursor-pointer text-white">
-                        <i class="ml-6 fa-solid fa-upload hover:text-blue-200 text-white text-xl cursor-pointer" @click="openFileInput()"></i>
+                        <i class="ml-6 fa-solid fa-upload hover:text-blue-200 text-white text-xl cursor-pointer"
+                            @click="openFileInput()"></i>
                         <input type="file" ref="fileInput" class="hidden" @change="handleFileChange()" />
                     </div>
 
                     <input v-model="boxContent"
-                        class="expandable-input text-gray-200 mt-1 mx-6 lg:ml-4 lg:mr-4 bg-gray-600 rounded-md focus: lg:w-full lg:max-h-100 lg:h-14 text-xs h-14 focus:outline-none p-3 font-pop"
+                        class="expandable-input text-gray-200 mt-1 mx-6 lg:ml-4 lg:mr-4 bg-gray-600 rounded-md focus: w-full `lg:w-full lg:max-h-100 lg:h-14 text-xs h-14 focus:outline-none p-3 font-pop"
                         type="text" />
                 </div>
                 <button @click="sendMessage()"
@@ -54,27 +56,20 @@
                 <h4 class="lg:ml-20 ml-6 mt-10 text-sm text-gray-400 font-montserrat font-bold">History</h4>
 
                 <div v-for="(message, index) in receivedMsg" :key="index" style="height: 100%; overflow-y: auto;"
-                    class="flex text-gray-200 mt-2 mx-6 lg:ml-20  lg:mr-20 bg-blue-950 opacity-3 rounded-md text-xs focus:outline-none p-4 pt-6 font-pop">
+                    class="flex text-gray-200 mt-2 mx-6 lg:ml-20 lg:mr-20 bg-blue-950 opacity-3 rounded-md text-xs focus:outline-none p-4 pt-6 font-pop">
                     <h2 class="mr-20 text-xs" v-if="copied === true">copied</h2>
-                    <h2 class="mr-20">{{ message }}</h2>
+                    <h2 class="mr-20">{{ message }}</h2> <!-- Display only the 'text' property -->
 
-                    <div @click="copyMessage(index)" class="cursor-pointer w-10 ml-6 lg:mr-24 mr-10 absolute right-0 ">
+                    <div @click="copyMessage(message.text)"
+                        class="cursor-pointer w-10 ml-6 lg:mr-24 mr-10 absolute right-0 ">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="white" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
                         </svg>
                     </div>
-
-
                 </div>
-
-
-
-
             </div>
-
-
             <div
                 class="ml-4 mr-4 mb-10 lg:w-110 w-80 h-8 rounded-sm bg-gray-7 00 fixed bottom-0 flex items-center justify-between">
                 <div class="flex ">
@@ -93,28 +88,28 @@
 </template>
 
 <script>
+import Vuecookies from 'vue-cookie'
 import ShareSession from './ShareSession.vue'
 export default {
     components: {
         ShareSession
     },
+
     data() {
         return {
+            sessionCode: null,
             copied: false,
             socket: "",
             boxContent: "",
             currentSession: "",
+            sCode: "",
             receivedMsg: [],
             shareSessionComponent: false,
 
         }
     },
-    props : {
-        code : { 
-            type : String,
-            required : true
-        }
-    },
+    props: ['sessionId'],
+
     methods: {
         sendMessage() {
             let msg = this.boxContent
@@ -141,24 +136,40 @@ export default {
             alert(`Selected file: ${selectedFile.name}`);
         },
     },
+    //retrieve user token and pass int into the socket 
+    // do some stuffs 
 
     mounted() {
-        const token = localStorage.getItem("access_token");
-        const code = localStorage.getItem("session_code");
-        this.currentSession = code
-        console.log(token)
-        //const storedMessages = JSON.parse(localStorage.getItem('receivedMessages'));
+        this.sessionCode = this.sessionId || Vuecookies.get('sessionId');
+        console.log(this.sessionCode)
+        this.socket = new WebSocket(`ws://localhost:8000/${this.sessionCode}?token=${Vuecookies.get('token')}`)
 
-        this.socket = new WebSocket(`ws://127.0.0.1:8000/socket?session_key=${code}`)
         this.socket.onmessage = (msg) => {
+            const message = msg;
 
-            this.receivedMsg.push(msg.data); // Add the message if it doesn't exist
-
-            this.receivedMsg.reverse();
+            // Check if the session code of the received message matches the current session code
+            if (this.sessionCode) {
+                console.log('Received message:', message);
+                this.receivedMsg = [...this.receivedMsg, message];
+                this.receivedMsg.reverse();
+            }
         }
-    }
+
+        // Event handler for socket errors
+        this.socket.onerror = (error) => {
+            console.error('WebSocket error:', error);
+        };
+    },
+    computed: {
+        filteredMessages() {
+            return this.receivedMsg.filter(
+                (message) => message && message.text && message.timestamp
+            );
+        }
+    },
 
 
 }
-
 </script>
+
+
