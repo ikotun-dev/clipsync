@@ -31,7 +31,7 @@
                     class="hidden lg:block ml-1  h-8 lg:mr-2rounded-lg text-gray-900 font-montserrat mt-1 text-xs lg:text-xs  font-extrabold ">
                     share</h2>-->
                 </div>
-                <font-awesome-icon :icon="['fas', 'upload']" />
+
 
 
 
@@ -45,17 +45,19 @@
                         <input type="file" ref="fileInput" class="hidden" @change="handleFileChange()" />
                     </div>
 
-                    <input v-model="boxContent"
-                        class="expandable-input text-gray-200 mt-1 mx-6 lg:ml-4 lg:mr-4 bg-gray-600 rounded-md focus: w-full `lg:w-full lg:max-h-100 lg:h-14 text-xs h-14 focus:outline-none p-3 font-pop"
+                    <input v-model="boxContent" @input="validateInput"
+                        class="expandable-input text-gray-200 mt-1 mx-6 lg:ml-4 lg:mr-4 bg-gray-600 rounded-md focus: w-full lg:w-full lg:max-h-100 lg:h-14 text-xs h-14 focus:outline-none p-3 font-pop"
                         type="text" />
+
+                    <i v-show="no_value === true" class="text-red-500 fa-solid fa-circle-exclamation mr-4 text-3xl"></i>
                 </div>
                 <button @click="sendMessage()"
                     class="absolute right-2 lg:mt-56 mt-47  font-extrabold font-montserrat  text-white mr-4 lg:mr-54 bg-blue-900 w-20 h-8 rounded-md text-xs hover:bg-gray-800">send</button>
             </div>
             <div class="flex flex-col mt-20">
                 <div class="flex items-center mt-10">
-                <h4 class="lg:ml-20 ml-6  text-sm text-gray-400 font-montserrat font-bold">History</h4>
-                <!-- <h4 class="ml-3 text-xl">&#128214;</h4> -->
+                    <h4 class="lg:ml-20 ml-6  text-sm text-gray-400 font-montserrat font-bold">History</h4>
+                    <!-- <h4 class="ml-3 text-xl">&#128214;</h4> -->
                 </div>
 
                 <div v-for="(message, index) in reversedMessages" :key="index" style="height: 100%; overflow-y: auto;"
@@ -64,13 +66,13 @@
                     <h2 class="mr-20">{{ message }}</h2> <!-- Display only the 'text' property -->
 
                     <div v-if="copiedStates[index]"
-                        class="cursor-pointer w-10 ml-6 lg:mr-2 lg:right-60 mr-10 absolute right-0 ">
-                        <i class="fa-solid fa-clipboard-check text-lg"></i>
+                        class="cursor-pointer w-10 ml-6 lg:mr-2 lg:right-60 mr-8 absolute right-0 ">
+                        <i class="fa-solid fa-clipboard-check text-lg text-gray-950"></i>
                     </div>
 
                     <div v-else @click="copyMessage(index)"
-                        class="cursor-pointer w-10 ml-6 lg:mr-2 lg:right-60 mr-10 absolute right-0 ">
-                        <i class="fa-solid fa-copy text-lg"></i>
+                        class="cursor-pointer w-10 ml-6 lg:mr-2 lg:right-60 mr-8 absolute right-0 ">
+                        <i class="fa-solid fa-copy text-lg text-white hover:text-gray-950"></i>
                     </div>
                 </div>
             </div>
@@ -107,6 +109,7 @@ export default {
             boxContent: "",
             currentSession: "",
             sCode: "",
+            no_value: false,
             receivedMsg: [],
             shareSessionComponent: false,
             copiedStates: [] // Array to store copied state for each message
@@ -115,9 +118,32 @@ export default {
     props: ['sessionId', 'sessionVal'],
 
     methods: {
+        validateInput() {
+            const input = this.boxContent
+            if (input.trim().length == 0) {
+                this.no_value = true;
+                console.log("pwd validation failed")
+                setTimeout(() => { this.no_value = false; }, 4000)
+            }
+            else if (input.length > 1 && input.length < 8) {
+                this.short_code = true;
+                setTimeout(() => { this.short_code = false; }, 4000)
+            }
+            else {
+                this.signUp()
+            }
+
+        },
+
         sendMessage() {
-            let msg = this.boxContent
-            this.socket.send(msg)
+            this.validateInput()
+
+            if (!this.no_value) {
+                // Proceed to send the content to the server via WebSocket
+                const contentToSend = this.boxContent;
+                this.socket.send(contentToSend); // Assuming this.socket is your WebSocket instance
+                console.log('Sending to server:', contentToSend);
+            }
         },
         openShareModal() {
             this.shareSessionComponent = true;
@@ -166,20 +192,20 @@ export default {
 
         this.socket.onmessage = (msg) => {
             //   const message = ms;
- 
+
             try {
                 const validMessage = JSON.parse(msg.data);
                 if (this.sessionCode) {
                     console.log('Received message:', validMessage);
                     this.receivedMsg = [...this.receivedMsg, validMessage.text];
-                   
+
                 }
             } catch (e) {
                 console.log('Received message:', msg);
                 this.receivedMsg = [...this.receivedMsg, msg.data];
             }
             // Check if the session code of the received message matches the current session code
-      
+
         }
 
         // Event handler for socket errors
@@ -194,7 +220,7 @@ export default {
             // Reverse the array before displaying it
             return this.receivedMsg.slice().reverse();
         }
-    
+
     },
 
 

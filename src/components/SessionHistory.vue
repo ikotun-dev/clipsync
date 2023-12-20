@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="w-20 p-2  lg:flex justify-center">
-                    <div class="bg-gray-500 px-4 py-1 rounded-sm hover:bg-blue-900 cursor-pointer " @click="goToSession(session)">
+                    <div class="bg-gray-600 font-montserrat px-4 py-1 rounded-md hover:bg-gray-900 cursor-pointer " @click="goToSession(session)">
                         View
                     </div>
                 </div>

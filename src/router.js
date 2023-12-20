@@ -10,11 +10,11 @@ import LoginPage from './components/LoginPage.vue'
 const routes = [
     { 'path': '/', component: MainPage },
     { 'path': '/create-session', component: HeaderTop },
-    { 'path': '/session/:sessionId/:sessionVal', name : 'session',  component: MajorPage, props : true },
+    { 'path': '/session/:sessionId/:sessionVal', name: 'session', component: MajorPage, props: true },
     { path: '/session/join', component: JoinSession },
     { 'path': '/new', component: SignUp },
     { 'path': '/dashboard', component: UserDashboard },
-    { 'path': '/login', component: LoginPage}
+    { 'path': '/login', component: LoginPage }
 ]
 
 const router = createRouter({
@@ -23,7 +23,7 @@ const router = createRouter({
 
 router.afterEach(() => {
     window.scrollTo(0, 0);
-  });
+});
 
 export default router
 

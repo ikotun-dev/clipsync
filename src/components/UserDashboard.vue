@@ -14,9 +14,11 @@
                         <i class="fa-solid fa-folder-plus text-xl"></i>
                     </div>
                 </RouterLink>
-                <div class="bg-blue-600 p-2 rounded-md">
-                    <i class="fa-solid fa-user-shield text-white text-lg"></i>
+                <RouterLink to="session/join">
+                <div class="bg-blue-600 p-2 rounded-md hover:bg-blue-800 text-gray-200 font-montserrat text-sm cursor-pointer">
+                    <i class="fa-solid fa-right-to-bracket text-white text-xl"></i>
                 </div>
+                </RouterLink>
             </div>
         </div>
         <div class="mt-12 pb-10 flex justify-center space-x-10">
@@ -32,11 +34,12 @@
                 :class="{ 'border-blue-600 border-b-2 font-extrabold': showTextHistory }" @click="toogleTextHistory">
                 <h3 class=" font-montserrat ">Texts</h3>
             </div>
-        </div>
+        </div> 
+        <div class="lg:px-24 md:px-18">
         <SessionHistory v-show="showSessionHistory === true"></SessionHistory>
         <FileHistory v-show="showFileHistory === true"></FileHistory>
         <TextHistory v-show="showTextHistory === true"></TextHistory>
-   
+   </div>
        <RouterLink to="create-session">
        <div class="fixed border-gray-950 font-extrabold bottom-10 right-7 lg:right-25 hover:bg-gray-900 bg-gray-800 px-5 hover:px-6 hover:py-5 py-4 rounded-full cursor-pointer">
         <i class="text-white fas fa-plus font-extrabold"></i>

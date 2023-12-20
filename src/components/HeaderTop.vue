@@ -7,9 +7,9 @@
        
 
       
-        <RouterLink to="/">
+        <RouterLink to="session/join">
             <div class=" bg-blue-600 p-2 rounded-md hover:bg-blue-800 text-gray-200 font-montserrat text-sm cursor-pointer  absolute top-10 right-0 mr-10 lg:mr-20">
-               <i class="fa-solid fa-user-shield text-xl"></i>
+               <i class="fa-solid fa-right-to-bracket text-xl"></i>
         </div>
         </RouterLink>
         </div>
