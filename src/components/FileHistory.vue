@@ -5,7 +5,7 @@
             <div
                 class="w-full rounded-md bg-gray-700 p-3 text-sm font-montserrat text-gray-300 flex items-center justify-between space-x-20 mb-2">
                 <div class="w-36 ">
-                    <h4 class="text-lg font-semibold">File history Coming Soon
+                    <h4 class="text-lg font-semibold">Coming Soon
                     </h4>
                 </div>
 

@@ -106,7 +106,7 @@ export default {
             let res;
             try {
                 this.processing = true
-                res = await axios.post('http://127.0.0.1:8000/session/check', sessionData, {
+                res = await axios.post('https://dropit.up.railway.app/session/check', sessionData, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${Vuecookies.get('token')}`

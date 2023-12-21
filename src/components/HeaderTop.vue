@@ -108,7 +108,7 @@ export default {
 
             try {
                 this.processing = true
-                const res = await axios.post('http://127.0.0.1:8000/user/create-session', sessionData, {
+                const res = await axios.post('https://dropit.up.railway.app/user/create-session', sessionData, {
                     headers: {
                         'Content-Type': 'application/json',
                          'Authorization': `Bearer ${Vuecookies.get('token')}`
@@ -119,7 +119,7 @@ export default {
                     Vuecookies.set('sessionId', res.data.savedSession._id)
                     //set sessionCode 
                     Vuecookies.set('sessionCode', sessionData.sessionCode)
-                    this.$router.push({ name: 'session', params: { code: this.sessionToken, sessionVal : Vuecookies.get('sessionCode') } });
+                    this.$router.push({ name: 'session', params: { code: this.sessionToken, sessionVal : Vuecookies.get('sessionCode'), sessionId : Vuecookies.get('sessionId') } });
                     //this.$store.state.sessionCode = sessionData.sessionCode
                 }
             }

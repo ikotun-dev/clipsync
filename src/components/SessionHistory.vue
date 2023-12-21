@@ -52,7 +52,7 @@ export default {
             //fethc from api
             const token = VueCookies.get('token');
             try  { 
-                res = await axios.get('http://localhost:8000/user/get-sessions', {headers : { 'Content-Type' : 'application/json', 'Authorization' : `Bearer ${token}`} })
+                res = await axios.get('https://dropit.up.railway.app/user/get-sessions', {headers : { 'Content-Type' : 'application/json', 'Authorization' : `Bearer ${token}`} })
                 if (res.status == 200) {
                     this.previousSessions = res.data
                     this.previousSessions.reverse()

@@ -107,7 +107,7 @@ export default {
             let res;
             try {
                 this.processing = true
-                res = await axios.post('http://localhost:8000/user/login', userData, {
+                res = await axios.post('https://dropit.up.railway.app/user/login', userData, {
                     headers: {
                         'Content-Type': 'application/json',
                         // 'Authorization': 'Bearer my-authorization-token'

@@ -279,7 +279,7 @@ export default {
     },
         connectWebSocket() {
             const token = Vuecookies.get('token');
-            this.socket = new WebSocket(`ws://localhost:8000/${this.sessionCode}?token=${token}`);
+            this.socket = new WebSocket(`wss://dropit.up.railway.app/${this.sessionCode}?token=${token}`);
 
             this.socket.onmessage = (msg) => {
                 this.handleWebSocketMessage(msg);
@@ -309,7 +309,7 @@ export default {
         console.log(this.nonUrlMessages)
         this.sessionCode = this.sessionId || Vuecookies.get('sessionId');
         console.log(this.sessionCode)
-        this.socket = new WebSocket(`ws://localhost:8000/${this.sessionCode}?token=${Vuecookies.get('token')}`)
+        this.socket = new WebSocket(`wss://dropit.up.railway.app/${this.sessionCode}?token=${Vuecookies.get('token')}`)
 
         this.socket.onmessage = (msg) => {
             //   const message = ms;
