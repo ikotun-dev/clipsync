@@ -169,9 +169,12 @@ export default {
 
                         // Check if the fileContent is an ArrayBuffer before sending
                         if (fileContent instanceof ArrayBuffer) {
-                            this.socket.send(fileContent);
+                            //  this.socket.send(fileContent);
                             console.log("file is also a Array buffer array")
                             this.fileSent = true;
+
+                            //reset the time flag to false
+                            setTimeout(() => { this.fileSent = false; }, 1000)
                         } else {
                             console.error('Error: File content is not an ArrayBuffer.');
                         }
@@ -179,7 +182,9 @@ export default {
 
                     // Read the file as an ArrayBuffer
                     fileReader.readAsArrayBuffer(selectedFile);
-
+                    // Clear the file input
+                    fileInput.value = null;
+                    this.selectedFileName = "";
                 } if (this.boxContent && !this.textSent) {
                     // Handle regular text message
 
