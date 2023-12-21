@@ -48,11 +48,11 @@ export default {
             this.previousSessions = JSON.parse(storedSessions);
             this.previousSessions.reverse();
             }
-
+            let res
             //fethc from api
             const token = VueCookies.get('token');
             try  { 
-                const res = await axios.get('http://localhost:8000/user/get-sessions', {headers : { 'Content-Type' : 'application/json', 'Authorization' : `Bearer ${token}`} })
+                res = await axios.get('http://localhost:8000/user/get-sessions', {headers : { 'Content-Type' : 'application/json', 'Authorization' : `Bearer ${token}`} })
                 if (res.status == 200) {
                     this.previousSessions = res.data
                     this.previousSessions.reverse()
@@ -60,9 +60,14 @@ export default {
                     localStorage.setItem('previousSessions', JSON.stringify(res.data))
                 } else {
                     this.previousSessions = []
+                } if (res.status === 401){
+                    this.$router.push('/login')
                 }
             } catch (error) { 
                 console.log(error)
+                if (res.status === 401){
+                    this.$router.push('/login')
+                }
             }
         }
     },

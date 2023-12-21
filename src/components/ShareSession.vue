@@ -17,7 +17,7 @@
               Share this link with others to join the group:
             </p>
             <a href="#" class="text-blue-500 font-montserrat text-sm mt-2">
-              {{ qrCodeValue }}
+              {{ code }}
             </a>
           </div>
           <button
@@ -50,7 +50,7 @@ import QrcodeVue from 'qrcode.vue'
     methods: {
 
       openShareModal() {
-        this.qrCodeValue = `http://10.110.0.34:8080/#/session/join`;
+        this.qrCodeValue = `http://127.0.0.1:8080/#/n`;
         this.show = true;
       },
       handleClose() {

@@ -2,8 +2,8 @@
     <div class="pb-40 pt-4 lg:pt-10 px-10 bg-gray-950">
         <div class="flex flex-col items-center justify-between">
             <div class="flex mt-6 mb-12 lg:justify-between items-center ">
-                <h3 class="text-blue-600 font-montserrat font-extrabold text-xl">dropit&#x21BA;</h3>
-                <div class="lg:w-[80vh] md:w-[50vh] w-[8vh] "></div>
+                <h3 class="text-blue-600 font-montserrat font-extrabold md:text-xl lg:text-xl text-sm ">dropit&#x21BA;</h3>
+                <div class="lg:w-[80vh] md:w-[50vh] w-[6vh] "></div>
                 <RouterLink to="/login">
                 <h3
                  

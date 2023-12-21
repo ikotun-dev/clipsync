@@ -63,40 +63,62 @@
             </div>
             <div class="flex flex-col mt-20">
                 <div class="flex items-center mt-10">
-                    <h4 class="lg:ml-20 ml-6  text-sm text-gray-400 font-montserrat font-bold">History</h4>
+                    <h4 class="lg:ml-20 ml-6  text-sm text-gray-400 font-montserrat font-bold" @click="toggleBlockState()"
+                        :class="{ 'border-b-2 border-b-blue-700 p-1': !toggleBlock }">Text Drops</h4>
                     <!-- <h4 class="ml-3 text-xl">&#128214;</h4> -->
+                    <h4 class="lg:ml-20 ml-6  text-sm text-gray-400 font-montserrat font-bold" @click="toggleBlockState()"
+                        :class="{ 'border-b-2 border-b-blue-700 p-1': toggleBlock }">File Drops</h4>
                 </div>
 
-                <div v-for="(message, index) in reversedMessages" :key="index" style="height: 100%; overflow-y: auto;"
+                <div v-show="toggleBlock === false" v-for="(message, index) in nonUrlMessages" :key="index"
+                    style="height: 100%; overflow-y: auto;"
                     class="flex text-gray-200 mt-2 mx-6 lg:ml-20 lg:mr-20 bg-blue-950 opacity-3 rounded-md text-xs focus:outline-none p-4 pt-4 font-pop">
 
-                    <h2 class="mr-20">{{ message }}</h2> <!-- Display only the 'text' property -->
+                    <div class="flex item-center">
 
-                    <div v-if="copiedStates[index]"
-                        class="cursor-pointer w-10 ml-6 lg:mr-2 lg:right-60 mr-8 absolute right-0 ">
-                        <i class="fa-solid fa-clipboard-check text-lg "></i>
-                    </div>
+                        {{ message }}
+                        <div v-if="copiedStates[index]"
+                            class="cursor-pointer w-10 ml-6 lg:mr-2 lg:right-60 mr-8 absolute right-0 ">
+                            <i class="fa-solid fa-clipboard-check text-lg "></i>
+                        </div>
 
-                    <div v-else @click="copyMessage(index)"
-                        class="cursor-pointer w-10 ml-6 lg:mr-2 lg:right-60 mr-8 absolute right-0 ">
-                        <i class="fa-solid fa-copy text-lg text-white "></i>
+                        <div v-else @click="copyMessage(index)"
+                            class="cursor-pointer w-10 ml-6 lg:mr-2 lg:right-60 mr-8 absolute right-0 ">
+                            <i class="fa-solid fa-copy text-lg text-white "></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div
-                class="ml-4 mr-4 mb-10 lg:w-110 w-80 h-8 rounded-sm bg-gray-7 00 fixed bottom-0 flex items-center justify-between">
-                <div class="flex ">
-                    <i class="mt-4 ml-2 mb-2 text-4xl text-green-500 mr-1">&#8226;</i>
-                    <h4 class="mt-8 font-montserrat font-extrabold text-white text-xs"> connected</h4>
-                </div>
 
-                <div class="lg:flex hidden mb-2">
-                    <h4 class="mt-8 font-montserrat font-extrabold text-red-600 text-xs"> close</h4>
+                <div v-show="toggleBlock === true" v-for="(message, index) in urlMessages" :key="index"
+                    style="height: 100%; overflow-y: auto;"
+                    class="flex text-gray-200 mt-2 mx-6 lg:ml-20 lg:mr-20 bg-blue-950 opacity-3 rounded-md text-xs focus:outline-none p-4 pt-4 font-pop">
+                    <div class="flex items-center">
+                        <i class="fas fa-file mr-2 text-xl"></i>
+                        <a :href="message" download="file" target="_blank">
+                            <h2 class="mr-20">File {{ index + 1 }}</h2>
+                        </a>
+                    </div>
                 </div>
 
             </div>
 
         </div>
+
+
+        <div
+            class="ml-4 mr-4 mb-10 lg:w-110 w-80 h-8 rounded-sm bg-gray-7 00 fixed bottom-0 flex items-center justify-between">
+            <div class="flex ">
+                <i class="mt-4 ml-2 mb-2 text-4xl text-green-500 mr-1">&#8226;</i>
+                <h4 class="mt-8 font-montserrat font-extrabold text-white text-xs"> connected</h4>
+            </div>
+
+            <div class="lg:flex hidden mb-2">
+                <h4 class="mt-8 font-montserrat font-extrabold text-red-600 text-xs"> close</h4>
+            </div>
+
+        </div>
+
+
     </div>
 </template>
 
@@ -110,6 +132,7 @@ export default {
 
     data() {
         return {
+            toggleBlock: false,
             sessionCode: null,
             copied: false,
             socket: "",
@@ -128,6 +151,25 @@ export default {
     props: ['sessionId', 'sessionVal'],
 
     methods: {
+        toggleBlockState() {
+            this.toggleBlock = !this.toggleBlock
+        },
+        isURL(message) {
+            try {
+                const parsedMessage = JSON.parse(message);
+
+                // Check if the parsed message has the structure of a file upload response
+                if (parsedMessage.type === 'file' && parsedMessage.fileName && parsedMessage.fileUrl) {
+                    return true;
+                }
+            } catch (error) {
+                // If parsing as JSON fails, it's not a file upload response
+            }
+
+            // Regular expression to check if the message is a URL
+            const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+            return urlRegex.test(message);
+        },
         //function for handling file changes 
         handleFileChange() {
             const fileInput = this.$refs.fileInput;
@@ -169,7 +211,7 @@ export default {
 
                         // Check if the fileContent is an ArrayBuffer before sending
                         if (fileContent instanceof ArrayBuffer) {
-                            //  this.socket.send(fileContent);
+                            this.socket.send(fileContent);
                             console.log("file is also a Array buffer array")
                             this.fileSent = true;
 
@@ -202,7 +244,7 @@ export default {
             this.shareSessionComponent = true;
         },
         copyMessage(index) {
-            const message = this.reversedMessages[index];
+            const message = this.nonUrlMessages[index];
             navigator.clipboard.writeText(message);
 
             // Set copied state just for this index
@@ -217,6 +259,26 @@ export default {
         openFileInput() {
             this.$refs.fileInput.click();
         },
+        connectWebSocket() {
+            const token = Vuecookies.get('token');
+            this.socket = new WebSocket(`ws://localhost:8000/${this.sessionCode}?token=${token}`);
+
+            this.socket.onmessage = (msg) => {
+                this.handleWebSocketMessage(msg);
+            };
+
+            this.socket.onclose = (event) => {
+                if (event.code === 401) {
+                    console.log('Authentication error. Redirecting to login.');
+                    // Perform your redirection here, e.g., using Vue Router
+                    this.$router.push('/login');
+                } else {
+                    console.log('WebSocket closed with code:', event.code);
+                    // Attempt to reconnect in the else block
+                    this.reconnectWebSocket();
+                }
+            };
+        },
 
     },
 
@@ -225,6 +287,8 @@ export default {
     // do some stuffs 
 
     mounted() {
+        console.log(this.urlMessages)
+        console.log(this.nonUrlMessages)
         this.sessionCode = this.sessionId || Vuecookies.get('sessionId');
         console.log(this.sessionCode)
         this.socket = new WebSocket(`ws://localhost:8000/${this.sessionCode}?token=${Vuecookies.get('token')}`)
@@ -271,12 +335,35 @@ export default {
             console.error('WebSocket error:', error);
         };
 
+        this.socket.onclose = (event) => {
+            // Check if the close code indicates an authentication error
+            if (event.code === 401) {
+                // Token expired or unauthorized, redirect to login or handle as needed
+                console.log('Authentication error. Redirecting to login.');
+                // Perform your redirection here, e.g., using Vue Router
+                this.$router.push('/login');
+            } else {
+                // Handle other close codes if needed
+                console.log('WebSocket closed with code:', event.code);
+                this.connectWebSocket()
+            }
+        };
+
+
         this.copiedStates = new Array(this.receivedMsg.length).fill(false);
     },
     computed: {
         reversedMessages() {
             // Reverse the array before displaying it
             return this.receivedMsg.slice().reverse();
+        },
+        // Filter messages that are URLs
+        urlMessages() {
+            return this.reversedMessages.filter(message => this.isURL(message));
+        },
+        // Filter messages that are not URLs
+        nonUrlMessages() {
+            return this.reversedMessages.filter(message => !this.isURL(message));
         }
 
     },

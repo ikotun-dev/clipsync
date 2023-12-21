@@ -26,7 +26,7 @@
                 :class="{ 'border-blue-600 border-b-2  font-extrabold': showSessionHistory}" @click="toogleSessionHistory">
                 <h3 class=" font-montserrat ">Drops</h3>
             </div>
-            <div class="px-5  text-gray-400 hover:text-gray-100  hover:border-blue-400 cursor-pointer"
+            <div class="disabled px-5  text-gray-400 hover:text-gray-100  hover:border-blue-400 cursor-pointer"
                 :class="{ 'border-blue-600 border-b-2 font-extrabold': showFileHistory }" @click="toogleFileHistory">
                 <h3 class=" font-montserrat ">Files</h3>
             </div>
