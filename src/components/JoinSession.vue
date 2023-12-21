@@ -34,7 +34,11 @@
                 <div class=" animate-spin rounded-full  border-b-4 border-t-4 w-6 h-6 border-white border-opacity-100 ">
                 </div>
             </button>
-
+            
+            <div class="flex justify-center cursor-pointer" @click="goToDashboard">
+                <h5 class="text-blue-300 font-montserrat text-xs mt-3">&#8617; &nbsp; Go to dashboard</h5>
+            </div>
+   
 
         </div>
         <div class="absolute bottom-0 ">
@@ -67,6 +71,10 @@ export default {
         }
     },
     methods: {
+        goToDashboard() {
+      // Navigate to the previous page
+      this.$router.go(-1);
+    },
         validateInput() {
             // Remove space characters from the input
             this.sessionToken = this.sessionToken.replace(/[\s!@#$%^&*()_+[\]\\{}|;':",.<>?]/g, '');

@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <ShareSession :code="currentSession" v-if="shareSessionComponent === true" @close="shareSessionComponent = false">
+    <div class="bg-gray-950 min-h-screen ">
+        <ShareSession :code="sessionCode" v-if="shareSessionComponent === true" @close="shareSessionComponent = false">
         </ShareSession>
-        <div style="height: auto; min-height: 70rem;" class="pb-20  lg:px-36  bg-gray-950">
+        <div style="height: auto; min-height: h-screen;" class="pb-20  lg:px-36  bg-gray-950">
             <div class="lg:pt-12 pt-5">
                 <a class="lg:ml-20 ml-4 pt-10 pb-3 text-blue-600 font-montserrat text-sm font-thin mr-4 cursor-pointer"
                     @click="$router.go(-1)"> &LessLess; Back</a>
@@ -62,7 +62,7 @@
                     class="absolute right-2 lg:mt-52 mt-48  font-extrabold font-montserrat  text-white mr-4 lg:mr-54 bg-blue-900 w-20 h-8 rounded-md text-xs hover:bg-gray-800">send</button>
             </div>
             <div class="flex flex-col mt-20">
-                <div class="flex items-center mt-10">
+                <div class="flex items-center mt-10 cursor-pointer">
                     <h4 class="lg:ml-20 ml-6  text-sm text-gray-400 font-montserrat font-bold" @click="toggleBlockState()"
                         :class="{ 'border-b-2 border-b-blue-700 p-1': !toggleBlock }">Text Drops</h4>
                     <!-- <h4 class="ml-3 text-xl">&#128214;</h4> -->
@@ -92,10 +92,16 @@
                 <div v-show="toggleBlock === true" v-for="(message, index) in urlMessages" :key="index"
                     style="height: 100%; overflow-y: auto;"
                     class="flex text-gray-200 mt-2 mx-6 lg:ml-20 lg:mr-20 bg-blue-950 opacity-3 rounded-md text-xs focus:outline-none p-4 pt-4 font-pop">
-                    <div class="flex items-center">
-                        <i class="fas fa-file mr-2 text-xl"></i>
-                        <a :href="message" download="file" target="_blank">
-                            <h2 class="mr-20">File {{ index + 1 }}</h2>
+                    <div  class="flex items-center justify-between">
+                        <!-- Navigation Link -->
+                        <router-link :to="{ path: '/view-file', query: { url: message } }" class="flex ">
+                            <i class="fas fa-file mr-2 text-xl"></i>
+                            <h2 class="mr-20 mt-1">File {{ index + 1 }}</h2>
+                        </router-link>
+
+                        <!-- Download Icon -->
+                        <a :href="message" download="file" target="_blank" class="cursor-pointer w-10 ml-6 lg:mr-2 lg:right-60 mr-8 absolute right-0 ">
+                            <i class="fas fa-download ml-2 text-xl"></i>
                         </a>
                     </div>
                 </div>
@@ -138,7 +144,7 @@ export default {
             socket: "",
             boxContent: "",
             currentSession: "",
-            sCode: "",
+            sCode: Vuecookies.get('sessionCode'),
             no_value: false,
             receivedMsg: [],
             shareSessionComponent: false,
@@ -237,12 +243,16 @@ export default {
                     this.socket.send(content);
                     this.textSent = true;
                     this.boxContent = "";
+
+                    //reset textSent flag
+                    this.textSent = false;
                 }
             }
         },
         openShareModal() {
             this.shareSessionComponent = true;
         },
+
         copyMessage(index) {
             const message = this.nonUrlMessages[index];
             navigator.clipboard.writeText(message);
@@ -259,6 +269,14 @@ export default {
         openFileInput() {
             this.$refs.fileInput.click();
         },
+        reconnectWebSocket() {
+        // You can add logic to limit reconnection attempts or add delays between attempts
+        console.log('Attempting to reconnect...');
+        // Retry connection after a delay
+        setTimeout(() => {
+            this.connectWebSocket();
+        }, 3000); // Adjust the delay as needed
+    },
         connectWebSocket() {
             const token = Vuecookies.get('token');
             this.socket = new WebSocket(`ws://localhost:8000/${this.sessionCode}?token=${token}`);
@@ -312,7 +330,7 @@ export default {
                         validMessage = JSON.parse(msg);
 
                         if (this.sessionCode && validMessage) {
-                            console.log('Received message:', validMessage);
+                            console.log('Received JSON message:', validMessage);
                             this.receivedMsg = [...this.receivedMsg, validMessage.text];
                         } else {
                             console.warn('Invalid message structure:', validMessage);
@@ -320,9 +338,9 @@ export default {
                         }
                     } catch (jsonParseError) {
                         // If JSON parsing fails, treat msg.data as plain text
-                        console.log('Error parsing JSON. Treating as plain text:', msg.data);
+                        console.log('Not JSON. Treating as plain text:', msg.data);
                         this.receivedMsg = [...this.receivedMsg, msg.data];
-                        validMessage = null;
+                        //   validMessage = null;
                     }
                 }
             } catch (e) {

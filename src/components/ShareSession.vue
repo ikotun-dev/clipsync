@@ -14,7 +14,8 @@
               <qrcode-vue :value="qrCodeValue" size="150" ></qrcode-vue>
             </div>
             <p class="text-gray-600 font-montserrat text-sm mt-4">
-              Share this link with others to join the group:
+              Share this link with others to join dropit<br/>
+              
             </p>
             <a href="#" class="text-blue-500 font-montserrat text-sm mt-2">
               {{ code }}

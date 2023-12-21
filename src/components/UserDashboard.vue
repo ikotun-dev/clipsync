@@ -42,7 +42,7 @@
    </div>
        <RouterLink to="create-session">
        <div class="fixed border-gray-950 font-extrabold bottom-10 right-7 lg:right-25 hover:bg-gray-900 bg-gray-800 px-5 hover:px-6 hover:py-5 py-4 rounded-full cursor-pointer">
-        <i class="text-white fas fa-plus font-extrabold"></i>
+        <i class="text-white fas fa-plus font-extrabold text-lg"></i>
         </div>
        </RouterLink>
     </div>

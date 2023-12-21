@@ -65,9 +65,9 @@ export default {
                 }
             } catch (error) { 
                 console.log(error)
-                if (res.status === 401){
+                
                     this.$router.push('/login')
-                }
+                
             }
         }
     },
