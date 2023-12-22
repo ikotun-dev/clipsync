@@ -55,7 +55,7 @@ export default {
                 res = await axios.get('https://dropit.up.railway.app/user/get-sessions', {headers : { 'Content-Type' : 'application/json', 'Authorization' : `Bearer ${token}`} })
                 if (res.status == 200) {
                     this.previousSessions = res.data
-                    this.previousSessions.reverse()
+                    
 
                     localStorage.setItem('previousSessions', JSON.stringify(res.data))
                 } else {

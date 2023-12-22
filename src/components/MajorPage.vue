@@ -75,15 +75,16 @@
                     class="flex text-gray-200 mt-2 mx-6 lg:ml-20 lg:mr-20 bg-blue-950 opacity-3 rounded-md text-xs focus:outline-none p-4 pt-4 font-pop">
 
                     <div class="flex item-center">
-
+                        
                         {{ message }}
+                      
                         <div v-if="copiedStates[index]"
-                            class="cursor-pointer w-10 ml-6 lg:mr-2 lg:right-60 mr-8 absolute right-0 ">
+                            class="cursor-pointer w-10 ml-6 mb-1 lg:mr-2 lg:right-60 mr-8 absolute right-0 ">
                             <i class="fa-solid fa-clipboard-check text-lg "></i>
                         </div>
 
                         <div v-else @click="copyMessage(index)"
-                            class="cursor-pointer w-10 ml-6 lg:mr-2 lg:right-60 mr-8 absolute right-0 ">
+                            class="cursor-pointer w-10 ml-6  mb-1 lg:mr-2 lg:right-60 mr-8 absolute right-0 ">
                             <i class="fa-solid fa-copy text-lg text-white "></i>
                         </div>
                     </div>
@@ -94,7 +95,7 @@
                     class="flex text-gray-200 mt-2 mx-6 lg:ml-20 lg:mr-20 bg-blue-950 opacity-3 rounded-md text-xs focus:outline-none p-4 pt-4 font-pop">
                     <div  class="flex items-center justify-between">
                         <!-- Navigation Link -->
-                        <router-link :to="{ path: '/view-file', query: { url: message } }" class="flex ">
+                        <router-link :to="{ message}" class="flex ">
                             <i class="fas fa-file mr-2 text-xl"></i>
                             <h2 class="mr-20 mt-1">File {{ index + 1 }}</h2>
                         </router-link>
@@ -281,10 +282,6 @@ export default {
             const token = Vuecookies.get('token');
             this.socket = new WebSocket(`wss://dropit.up.railway.app/${this.sessionCode}?token=${token}`);
 
-            this.socket.onmessage = (msg) => {
-                this.handleWebSocketMessage(msg);
-            };
-
             this.socket.onclose = (event) => {
                 if (event.code === 401) {
                     console.log('Authentication error. Redirecting to login.');
@@ -361,6 +358,7 @@ export default {
                 // Perform your redirection here, e.g., using Vue Router
                 this.$router.push('/login');
             } else {
+                this.$router.go(-1);
                 // Handle other close codes if needed
                 console.log('WebSocket closed with code:', event.code);
                 this.connectWebSocket()

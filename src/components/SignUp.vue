@@ -50,7 +50,7 @@
                type="submit"
                 class="lg:mt-5 mt-4 w-72 h-10 bg-blue-900 rounded-md font-montserrat font-extrabold text-center text-gray-300 text-xs lg:text-xs hover:bg-blue-600"
                 @click="ValidateCredentials()"
-                >Join Waitlist &#x1F680;</button>
+                >Sign up &#x1F680;</button>
             <button v-else class="h-10 rounded-md w-72 mt-4 py-1 bg-blue-500 flex items-center justify-center">
                 <div class=" animate-spin rounded-full  border-b-4 border-t-4 w-6 h-6 border-white border-opacity-100 ">
                 </div>
@@ -129,7 +129,8 @@ export default {
                 })
                 if (res.status == 201) {
                     this.signupSucess = true;
-                    setTimeout(() => { this.signupSucess = false; }, 5000)
+                    setTimeout(() => { this.signupSucess = false; 
+                    this.$router.push('/login')}, 2000)
                     this.email ='',
                     this.password =''
                     this.username =''

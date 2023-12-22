@@ -21,24 +21,24 @@
                
                 <input v-model="username" 
                     class="mt-2 w-72 p-2 rounded-md text-xs font-extrabold text-gray-950 text-bold font-montserrat focus:bg-gray-200 border border-3 border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    type="text" placeholder="Username/Email" required/>
+                    type="text" placeholder="Username" required/>
             </div>
             <div class="mt-2 flex flex-col">
                
                 <input v-model="password" 
                     class="mt-2 w-72 font-montserrat text-xs font-extrabold text-blue-800 p-2 rounded-md focus:bg-gray-200 border border-3 border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    type="text" placeholder="Password" required/>
+                    type="password" placeholder="Password" required/>
             </div>
     
             <h4 v-show="no_value == true" class="text-red-600 font-montserrat mt-2 font-extrabold text-xs">Enter a valid password </h4>
             <h4 v-show="invalidCredentials === true " class="text-red-600 font-montserrat mt-2 ml-2 font-extrabold text-xs">invalid Credentials </h4>
             <button v-if="processing == false"
                type="submit"
-                class="lg:mt-3 mt-2 w-72 h-10 bg-blue-900 rounded-md font-montserrat font-extrabold text-center text-gray-300 text-xs lg:text-xs hover:bg-blue-600"
-                @click="Login()"
+                class="lg:mt-3 mt-3 w-72 h-8 bg-blue-900 rounded-md font-montserrat font-extrabold text-center text-gray-300 text-xs lg:text-xs hover:bg-blue-600"
+                @click="ValidateCredentials()"
                 >Go in &#x1F680;</button>
             <button v-else class="h-10 rounded-md w-72 mt-4 py-1 bg-blue-500 flex items-center justify-center">
-                <div class=" aanimate-spin rounded-full  border-4 w-6 h-6 border-white border-b-gray-400 border-opacity-100  ">
+                <div class=" animate-spin rounded-full  border-4 w-6 h-6 border-white border-b-gray-400 border-opacity-100  ">
                 </div>
             </button>
             <RouterLink to="/">
@@ -95,7 +95,7 @@ export default {
                 setTimeout(() => { this.short_code = false; }, 4000)
             }
             else {
-                this.signUp()
+                this.Login()
             }
 
         },
