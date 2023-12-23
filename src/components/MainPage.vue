@@ -15,7 +15,7 @@
                 <h3
                  
                     class="text-gray-200 font-montserrat border border-blue-800 rounded-lg text-xs  lg:px-0 h-8 pt-2 hover:bg-blue-900 cursor-pointer bg-blue-800 w-20 lg:w-32 text-center">
-                    Sign up &#x1F680;</h3>
+                    Sign up 🔗</h3>
                 </RouterLink>
             </div>
 

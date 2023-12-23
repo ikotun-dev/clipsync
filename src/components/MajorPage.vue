@@ -95,10 +95,10 @@
                     class="flex text-gray-200 mt-2 mx-6 lg:ml-20 lg:mr-20 bg-blue-950 opacity-3 rounded-md text-xs focus:outline-none p-4 pt-4 font-pop">
                     <div  class="flex items-center justify-between">
                         <!-- Navigation Link -->
-                        <router-link :to="{ message}" class="flex ">
+                        <a :href="message" class="flex ">
                             <i class="fas fa-file mr-2 text-xl"></i>
                             <h2 class="mr-20 mt-1">File {{ index + 1 }}</h2>
-                        </router-link>
+                        </a>
 
                         <!-- Download Icon -->
                         <a :href="message" download="file" target="_blank" class="cursor-pointer w-10 ml-6 lg:mr-2 lg:right-60 mr-8 absolute right-0 ">
@@ -286,7 +286,7 @@ export default {
                 if (event.code === 401) {
                     console.log('Authentication error. Redirecting to login.');
                     // Perform your redirection here, e.g., using Vue Router
-                    this.$router.push('/login');
+                   //  this.$router.push('/login');
                 } else {
                     console.log('WebSocket closed with code:', event.code);
                     // Attempt to reconnect in the else block
@@ -356,7 +356,7 @@ export default {
                 // Token expired or unauthorized, redirect to login or handle as needed
                 console.log('Authentication error. Redirecting to login.');
                 // Perform your redirection here, e.g., using Vue Router
-                this.$router.push('/login');
+               // this.$router.push('/login');
             } else {
                 this.$router.go(-1);
                 // Handle other close codes if needed
