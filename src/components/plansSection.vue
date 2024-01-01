@@ -46,7 +46,7 @@
                     </div>
                     <RouterLink to="/new">
                         <button
-                            class="lg:mt-60 mb-10 hover:bg-gray-800 bg-blue-950 p-3  rounded-md  text-white font-montserrat text-sm items-center lg:w-24">
+                            class="lg:mt-60 mt-32 mb-10 hover:bg-gray-800 bg-blue-950 p-3  rounded-md  text-white font-montserrat text-sm items-center lg:w-24">
                             Join &nbsp; &#x1F680;
                         </button>
                     </RouterLink>
