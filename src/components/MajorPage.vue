@@ -79,12 +79,12 @@
                         {{ message }}
                     </div>
                         <div v-if="copiedStates[index]"
-                            class="cursor-pointer w-10 ml-6 mb-1 lg:mr-2 lg:right-60 mr-8 absolute right-0 ">
+                            class="cursor-pointer w-10 ml-6 mb-2 lg:mr-2 lg:right-60 mr-8 absolute right-0 ">
                             <i class="fa-solid fa-clipboard-check text-lg "></i>
                         </div>
 
                         <div v-else @click="copyMessage(index)"
-                            class="cursor-pointer w-10 ml-6  mb-1 lg:mr-2 lg:right-60 mr-8 absolute right-0 ">
+                            class="cursor-pointer w-10 ml-6  mb-2 lg:mr-2 lg:right-60 mr-8 absolute right-0 ">
                             <i class="fa-solid fa-copy text-lg text-white "></i>
                         </div>
                     </div>
