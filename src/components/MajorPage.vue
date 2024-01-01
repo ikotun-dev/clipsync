@@ -75,7 +75,7 @@
                     class="flex text-gray-200 mt-2 mx-6 lg:ml-20 lg:mr-20 bg-blue-950 opacity-3 rounded-md text-xs focus:outline-none p-4 pt-4 font-pop">
 
                     <div class="flex item-center">
-                        <div class="w-16">
+                        <div class="w-48 lg:w-[60vh]">
                         {{ message }}
                     </div>
                         <div v-if="copiedStates[index]"
