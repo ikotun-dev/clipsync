@@ -45,8 +45,9 @@ export default {
             //get sessions from local storage
             const storedSessions = localStorage.getItem('previousSessions');
             if (storedSessions) { 
-            this.previousSessions = JSON.parse(storedSessions);
-            this.previousSessions.reverse();
+            const  reversedStoredSessions = (JSON.parse(storedSessions))
+            this.previousSessions = reversedStoredSessions
+          //  this.previousSessions.reverse();
             }
             let res
             //fethc from api
