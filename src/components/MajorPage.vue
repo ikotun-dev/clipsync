@@ -295,6 +295,13 @@ export default {
             };
         },
 
+        checkAuth() { 
+          const token = Vuecookies.get('token')
+          if (!token) { 
+            this.$router.push('/login')
+          }
+        }
+
     },
 
 
@@ -302,6 +309,8 @@ export default {
     // do some stuffs 
 
     mounted() {
+        //running the function to check if an authroization cookie exists 
+        this.checkAuth()
         console.log(this.urlMessages)
         console.log(this.nonUrlMessages)
         this.sessionCode = this.sessionId || Vuecookies.get('sessionId');
@@ -309,7 +318,7 @@ export default {
         this.socket = new WebSocket(`wss://dropit.up.railway.app/${this.sessionCode}?token=${Vuecookies.get('token')}`)
 
         this.socket.onmessage = (msg) => {
-            //   const message = ms;
+            //   const message = ms;.
             console.log(typeof msg)
             try {
                 const isBinary = msg.data instanceof ArrayBuffer;
@@ -336,8 +345,9 @@ export default {
                     } catch (jsonParseError) {
                         // If JSON parsing fails, treat msg.data as plain text
                         console.log('Not JSON. Treating as plain text:', msg.data);
-                        this.receivedMsg = [...this.receivedMsg, msg.data];
-                        //   validMessage = null;
+
+                        this.receivedMsg = [...this.receivedMsg, msg.data];  //   validMessage = null;
+
                     }
                 }
             } catch (e) {
